@@ -8,7 +8,7 @@
 ;; fix the PATH variable on Mac OS X gui
 (when dc/macosx-gui-p
   (setenv "PATH" (shell-command-to-string "source ~/.path; echo -n $PATH"))
-  (setq exec-path (append exec-path (split-string (getenv "PATH") ":"))))
+  (setq exec-path (append (split-string (getenv "PATH") ":") exec-path)))
 
 ;; customizations go in a separate file:
 (setq custom-file (concat user-emacs-directory "custom.el"))
