@@ -1,0 +1,49 @@
+#! /bin/bash
+#
+# symlink git-stored dotfiles into home directory
+# adapted from github.com/technomancy/dotfiles
+
+set -e
+
+symlink()
+{
+    src=$1
+    targ=$2
+    # if we have a good source, target
+    if [ ! -z "$src" ] && [ ! -z "$targ" ]; then
+        if [ ! -h $targ ]; then
+            # if it's not a symlink already...
+            if [ -r $targ ]; then
+                # but is there, then remove it
+                rm -rf $targ
+            fi
+            # and symlink it
+            ln -s ${src} ${targ}
+        fi
+    fi
+}
+
+
+OS=`uname`
+
+if [ $OS == "Darwin" ]; then
+    echo "setting up mac os x config files"
+    # ...
+fi
+
+if [ $OS == "Linux" ]; then
+    echo "setting linux config files"
+    # ...
+fi
+
+# setup dot files
+for src_f in $(ls -ad ~/.dotfiles/dot/.[a-z]* ~/.dotfiles/${OS}/dot/.[a-z]*) ; do
+    targ_f=`basename $src_f`
+    symlink $src_f "$HOME/${targ_f}"
+done
+
+# setup bin files:
+for src_f in $(ls -d ~/.dotfiles/bin/* ~/.dotfiles/${OS}/bin/*) ; do
+    targ_f=`basename $src_f`
+    symlink $src_f "$HOME/bin/$targ_f"
+done

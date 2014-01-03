@@ -1,0 +1,14 @@
+\#*
+*.elc
+*~
+/dot/.emacs.d/ac-comphist.dat
+/dot/.emacs.d/auto-save-list
+/dot/.emacs.d/backups
+/dot/.emacs.d/bookmarks
+/dot/.emacs.d/elpa
+/dot/.emacs.d/places
+/dot/.emacs.d/snippets
+/dot/.emacs.d/tramp
+/dot/.emacs.d/url
+/dot/.lein/indicies
+/dot/.lein/repl-history

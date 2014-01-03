@@ -1,0 +1,5 @@
+# global git ignore file
+*.elc
+*.pyc
+*~
+.DS_Store
