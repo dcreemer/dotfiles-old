@@ -28,7 +28,12 @@ OS=`uname`
 
 if [ $OS == "Darwin" ]; then
     echo "setting up mac os x config files"
-    # ...
+
+    # link 'subl' to sublime text
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+    symlink "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/bin/subl"
+    IFS=$SAVEIFS
 fi
 
 if [ $OS == "Linux" ]; then
