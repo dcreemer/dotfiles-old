@@ -65,11 +65,13 @@
 ;;
 ;; save backups to common location, and keep more versions
 ;;
-(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "state/backups"))))
 (setq delete-old-versions t
       kept-new-versions 3
       kept-old-versions 2
       version-control t)
+
+(setq auto-save-list-file-prefix (concat user-emacs-directory "state/auto-save-list/.saves-"))
 
 ;;
 ;; Magit
@@ -84,11 +86,12 @@
 ; better directory traversal
 (ido-mode t)
 (setq ido-enable-flex-matching t)
+(setq ido-save-directory-list-file (concat user-emacs-directory "state/ido.last"))
 
 ; return to same point in a buffer when revisiting the file:
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (concat user-emacs-directory "places"))
+(setq save-place-file (concat user-emacs-directory "state/places"))
 
 ; ensure all buffers have unique names
 (require 'uniquify)
@@ -146,6 +149,7 @@
 ; auto-completion everywhere
 (require 'auto-complete-config)
 (ac-config-default)
+(setq ac-comphist-file (concat user-emacs-directory "state/ac-comphist.dat"))
 
 ; highlight-synbols in all programming modes:
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
