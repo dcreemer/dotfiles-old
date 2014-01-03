@@ -36,8 +36,8 @@ alias ls='ls -GF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-# default emacs server port location on Mac OS X, user 501
-alias ec='emacsclient -s /tmp/emacs501/server'
+# default emacs server port location on Mac OS X
+alias ec='emacsclient -s /tmp/emacs${UID}/server'
 
 # virtualenv
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
