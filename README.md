@@ -15,9 +15,9 @@ repository into ```$HOME/.dotfiles-base```, and then execute commands to
 create symlinks for the various dotfiles and commands.
 
 This bootstrap process will possibly then be repeated for "private" and
-"work" environments, each with furthe environment customizations. In addition
-to installing symlinks, ```pre-install.sh``` and ```post-install.sh``` hook
-scripts will be executed if found.
+"work" environments, each with further environment customizations. In
+addition to installing symlinks, ```pre-install.sh``` and
+```post-install.sh``` hook scripts will be executed if found.
 
 I store my non-public git repositories encrpyted with GPG and
 [git-remote-gcrypt](https://github.com/joeyh/git-remote-gcrypt) on Dropbox. See [the code](https://github.com/dcreemer/dotfiles/blob/master/bin/init/go.sh#L47) for how this works.
