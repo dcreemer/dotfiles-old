@@ -18,7 +18,7 @@ if [ -r $HOME/.dotfiles-base/pre-install.sh ]; then
 fi
 
 # install
-$HOME/.dotfiles/bin/link-dotfiles base
+$HOME/.dotfiles-base/bin/link-dotfiles base
 
 # run post-install hooks
 if [ -r $HOME/.dotfiles-base/pre-install.sh ]; then
@@ -43,7 +43,7 @@ for m in private work ; do
     fi
     if [ -d $HOME/.dotfiles-${m} ]; then
         # link files
-        $HOME/.dotfiles/bin/link-dotfiles $m
+        $HOME/.dotfiles-base/bin/link-dotfiles $m
         # run post-install hook
         if [ -r $HOME/.dotfiles-${m}/post-install.sh ]; then
             $HOME/.dotfiles-${m}/post-install.sh
