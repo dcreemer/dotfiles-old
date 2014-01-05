@@ -8,9 +8,9 @@ set -e
 # how are we called?
 case "$1" in
     base)
-        DF="$HOME/.dotfiles"
+        DF="$HOME/.dotfiles-base"
         ;;
-    priv)
+    private)
         DF="$HOME/.dotfiles-private"
         ;;
     work)
@@ -19,7 +19,7 @@ case "$1" in
     *)
         link-dotfiles base
         if [ -d $HOME/.dotfiles-private ]; then
-            link-dotfiles priv
+            link-dotfiles private
         fi
         if [ -d $HOME/.dotfiles-work ]; then
             link-dotfiles work
