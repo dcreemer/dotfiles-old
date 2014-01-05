@@ -7,3 +7,25 @@ if [ ! -r $grc ]; then
     curl -fsSL "https://raw.github.com/dcreemer/git-remote-gcrypt/master/git-remote-gcrypt" > $grc
     chmod a+x $grc
 fi
+
+# install packages
+OS=`uname`
+
+if [ $OS == "Darwin" ]; then
+    # install homebrew if needed
+    if [ ! -x /usr/local/bin/brew ]; then
+        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    fi
+
+    # install packages:
+    for p in $(cat $HOME/.dotfiles-base/brew-packages) ; do
+        if [ ! -d /usr/local/Cellar/${p} ]; then
+            echo "[INSTALL] $p"
+            brew install $p
+        fi
+    done
+fi
+
+if [ $OS == "Linux" ]; then
+    echo "tbd"
+fi
