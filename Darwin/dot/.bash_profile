@@ -50,7 +50,12 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
+# private settings
+if [ -f $HOME/.bash_private ]; then
+    source $HOME/.bash_private
+fi
+
 # work specific settings
-if [ -f $HOME/.work ]; then
-    source ~/.work
+if [ -f $HOME/.bash_work ]; then
+    source $HOME/.bash_work
 fi
