@@ -66,10 +66,12 @@ if [ $OS == "Linux" ]; then
 fi
 
 # setup generic dot files
-for src_f in $(ls -ad ${DF}/dot/.[a-z]*) ; do
-    targ_f=`basename $src_f`
-    symlink $src_f "$HOME/${targ_f}"
-done
+if [ -d ${DF}/dot ]; then
+    for src_f in $(ls -ad ${DF}/dot/.[a-z]*) ; do
+        targ_f=`basename $src_f`
+        symlink $src_f "$HOME/${targ_f}"
+    done
+fi
 # setup platform dot files
 if [ -d ${DF}/${OS}/dot ]; then
     for src_f in $(ls -ad ${DF}/${OS}/dot/.[a-z]*) ; do
@@ -79,10 +81,13 @@ if [ -d ${DF}/${OS}/dot ]; then
 fi
 
 # setup generic bin files:
-for src_f in $(ls -d ${DF}/bin/*) ; do
-    targ_f=`basename $src_f`
-    symlink $src_f "$HOME/bin/$targ_f"
-done
+if [ -d ${DF}/bin ]; then
+    for src_f in $(ls -d ${DF}/bin/*) ; do
+        targ_f=`basename $src_f`
+        symlink $src_f "$HOME/bin/$targ_f"
+    done
+fi
+# setup platorm bin files:
 if [ -d ${DF}/${OS}/bin ]; then
     for src_f in $(ls -d ${DF}/${OS}/bin/*) ; do
         targ_f=`basename $src_f`
