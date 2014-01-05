@@ -5,6 +5,28 @@
 
 set -e
 
+# how are we called?
+case "$1" in
+    base)
+        DF="$HOME/.dotfiles"
+        ;;
+    priv)
+        DF="$HOME/.dotfiles-private"
+        ;;
+    work)
+        DF="$HOME/.dotfiles-work"
+        ;;
+    *)
+        link-dotfiles base
+        if [ -d $HOME/.dotfiles-private ]; then
+            link-dotfiles priv
+        fi
+        if [ -d $HOME/.dotfiles-work ]; then
+            link-dotfiles work
+        fi
+        exit 0
+esac
+
 symlink()
 {
     src=$1
@@ -18,17 +40,19 @@ symlink()
                 rm -rf $targ
             fi
             # and symlink it
-            ln -s ${src} ${targ}
+            echo "[LINK]  $targ"
+            ln -s $src $targ
         fi
     fi
 }
 
-
 OS=`uname`
 
-if [ $OS == "Darwin" ]; then
-    echo "setting up mac os x config files"
+if [ ! -d $HOME/bin ]; then
+    mkdir $HOME/bin
+fi
 
+if [ $OS == "Darwin" ]; then
     # link 'subl' to sublime text
     SAVEIFS=$IFS
     IFS=$(echo -en "\n\b")
@@ -37,18 +61,31 @@ if [ $OS == "Darwin" ]; then
 fi
 
 if [ $OS == "Linux" ]; then
-    echo "setting linux config files"
+    echo "tbd"
     # ...
 fi
 
-# setup dot files
-for src_f in $(ls -ad ~/.dotfiles/dot/.[a-z]* ~/.dotfiles/${OS}/dot/.[a-z]*) ; do
+# setup generic dot files
+for src_f in $(ls -ad ${DF}/dot/.[a-z]*) ; do
     targ_f=`basename $src_f`
     symlink $src_f "$HOME/${targ_f}"
 done
+# setup platform dot files
+if [ -d ${DF}/${OS}/dot ]; then
+    for src_f in $(ls -ad ${DF}/${OS}/dot/.[a-z]*) ; do
+        targ_f=`basename $src_f`
+        symlink $src_f "$HOME/${targ_f}"
+    done
+fi
 
-# setup bin files:
-for src_f in $(ls -d ~/.dotfiles/bin/* ~/.dotfiles/${OS}/bin/*) ; do
+# setup generic bin files:
+for src_f in $(ls -d ${DF}/bin/*) ; do
     targ_f=`basename $src_f`
     symlink $src_f "$HOME/bin/$targ_f"
 done
+if [ -d ${DF}/${OS}/bin ]; then
+    for src_f in $(ls -d ${DF}/${OS}/bin/*) ; do
+        targ_f=`basename $src_f`
+        symlink $src_f "$HOME/bin/$targ_f"
+    done
+fi
