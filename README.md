@@ -20,7 +20,12 @@ addition to installing symlinks, ```pre-install.sh``` and
 ```post-install.sh``` hook scripts will be executed if found.
 
 I store my non-public git repositories encrpyted with GPG and
-[git-remote-gcrypt](https://github.com/joeyh/git-remote-gcrypt) on Dropbox. See [the code](https://github.com/dcreemer/dotfiles/blob/master/bin/init/go.sh#L47) for how this works.
+[git-remote-gcrypt](https://github.com/joeyh/git-remote-gcrypt) on Dropbox --
+see
+[the code](https://github.com/dcreemer/dotfiles/blob/master/bin/init/go.sh#L47)
+for how this works. Both [GPG Suite](https://gpgtools.org) and
+[Dropbox](https://dropbox.com) are also automatically installed if not
+preset.
 
 Todo
 ====
