@@ -74,6 +74,11 @@
 (setq auto-save-list-file-prefix (concat user-emacs-directory "state/auto-save-list/.saves-"))
 
 ;;
+;; custom functions
+;;
+(load-file (concat user-emacs-directory "util.el"))
+
+;;
 ;; Magit
 ;;
 (global-set-key "\C-xg" 'magit-status)
