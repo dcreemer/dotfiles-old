@@ -48,7 +48,7 @@ for m in private work ; do
     if [ ! -r $HOME/.dotfiles-${m} ] && [ -d $REPO ]; then
         # clone:
         echo "[CLONE] dotfiles-${m}"
-        git clone gcrpyt::rsync:${REPO} $HOME/.dotfiles-${m}
+        git clone gcrypt::rsync://${REPO} $HOME/.dotfiles-${m}
 
         # install:
         do_install $m
