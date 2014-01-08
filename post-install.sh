@@ -19,7 +19,7 @@ if [ $OS == "Darwin" ]; then
 
     # install packages:
     for p in $(cat $HOME/.dotfiles-base/brew-packages) ; do
-        if [ ! -d /usr/local/Cellar/${p} ]; then
+        if ! brew list $p > /dev/null 2> /dev/null; then
             echo "[INSTALL] $p"
             brew install $p
         fi
