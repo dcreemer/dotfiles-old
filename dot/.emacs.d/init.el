@@ -42,7 +42,7 @@
                       python-mode
                       rainbow-delimiters
                       smartparens
-                      tidy
+                      w3m
                       yaml-mode
                       yasnippet))
 
@@ -74,7 +74,7 @@
 (setq auto-save-list-file-prefix (concat user-emacs-directory "state/auto-save-list/.saves-"))
 
 ;;
-;; custom functions
+;; load custom functions
 ;;
 (load-file (concat user-emacs-directory "util.el"))
 
@@ -88,21 +88,21 @@
 ;; UI Settings
 ;;
 
-; better directory traversal
+;; better directory traversal
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-save-directory-list-file (concat user-emacs-directory "state/ido.last"))
 
-; return to same point in a buffer when revisiting the file:
+;; return to same point in a buffer when revisiting the file:
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "state/places"))
 
-; ensure all buffers have unique names
+;; ensure all buffers have unique names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-; turn on menu-, off tool-, and scroll-bars
+;; turn on menu-, off tool-, and scroll-bars
 (if window-system
     (menu-bar-mode 1)
   (menu-bar-mode -1))
@@ -113,7 +113,7 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
-; set the color theme to something nice
+;; set the color theme to something nice
 (when window-system
   (require 'color-theme)
   (color-theme-initialize)
@@ -125,17 +125,19 @@
 ;; always show empty lines at end of buffer
 (set-default 'indicate-empty-lines t)
 
-; Use shift key to navigate windows:
+;; Use shift key to navigate windows:
 (windmove-default-keybindings 'shift)
 
-; make the cursor more visible:
+;; make the cursor more visible:
 (global-hl-line-mode)
 
 (set-default 'fill-column 77)
 
+;;
 ;; Code Formatting Globally:
+;;
 
-; tabs are 8 charachters, but we never generate them.
+;; tabs are 8 charachters, but we never generate them.
 (set-default 'c-basic-offset 4)
 (set-default 'indent-tabs-mode nil)
 (set-default 'tab-width 8)
@@ -200,6 +202,10 @@
             (local-set-key (kbd "M-SPC") 'jedi:complete)
             (setq jedi:use-shortcuts t))) ; M-. and M-,
 
+;;
+;; email configuration is kept in a separate private file:
+;;
+(load-file "~/.emacs.private/mail.el")
 
 ;;
 ;; start emacs server
