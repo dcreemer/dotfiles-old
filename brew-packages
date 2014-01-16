@@ -1,10 +1,15 @@
+'aspell --with-lang-en'
 bash-completion
+curl-ca-bundle
 emacs
 git
 go
 leiningen
 markdown
+mu
+offline-imap
 pianobar
 s3cmd
 siege
+w3m
 wget
