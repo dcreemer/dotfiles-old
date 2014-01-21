@@ -205,9 +205,11 @@
             (setq jedi:use-shortcuts t))) ; M-. and M-,
 
 ;;
-;; email configuration is kept in a separate private file:
+;; load private config:
 ;;
-(load-file "~/.emacs.private/dc-mail.el")
+(setq dc/private-emacs-dir "~/.emacs.private/")
+(when (file-exists-p dc/private-emacs-dir)
+  (load-file (concat dc/private-emacs-dir "init.el")))
 
 ;;
 ;; start emacs server
