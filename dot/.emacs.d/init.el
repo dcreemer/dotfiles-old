@@ -138,6 +138,12 @@
 (set-default 'fill-column 77)
 
 ;;
+;; spelling
+;;
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+
+;;
 ;; Code Formatting Globally:
 ;;
 
