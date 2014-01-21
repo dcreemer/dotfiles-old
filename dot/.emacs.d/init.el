@@ -36,6 +36,7 @@
                       find-file-in-repository
                       go-mode
                       highlight-symbol
+                      htmlize
                       ido-vertical-mode
                       jedi
                       magit
