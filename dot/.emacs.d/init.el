@@ -40,6 +40,7 @@
                       jedi
                       magit
                       markdown-mode
+                      oauth
                       python-mode
                       rainbow-delimiters
                       smartparens
