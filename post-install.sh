@@ -27,5 +27,12 @@ if [ $OS == "Darwin" ]; then
 fi
 
 if [ $OS == "Linux" ]; then
-    echo "tbd"
+    # install packages:
+    for p in $(cat $HOME/.dotfiles-base/apt-packages) ; do
+        dpkg -l $p >/dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            echo "[INSTALL] $p"
+            #sudo apt-get install -y $p
+        fi
+    done
 fi
