@@ -27,10 +27,6 @@ for how this works. Both [GPG Suite](https://gpgtools.org) and
 [Dropbox](https://dropbox.com) are also automatically installed if not
 preset.
 
-Todo
-====
-- add Linux config
-
 Notes
 =====
 based on ideas from
