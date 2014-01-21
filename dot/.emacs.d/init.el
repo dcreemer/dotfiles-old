@@ -36,6 +36,7 @@
                       find-file-in-repository
                       go-mode
                       highlight-symbol
+                      ido-vertical-mode
                       jedi
                       magit
                       markdown-mode
@@ -92,6 +93,7 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-save-directory-list-file (concat user-emacs-directory "state/ido.last"))
+(ido-vertical-mode 1)
 
 ;; return to same point in a buffer when revisiting the file:
 (require 'saveplace)
@@ -114,10 +116,10 @@
   (scroll-bar-mode -1))
 
 ;; set the color theme to something nice
+(require 'color-theme)
+(color-theme-initialize)
+(load-theme 'cyberpunk t)
 (when window-system
-  (require 'color-theme)
-  (color-theme-initialize)
-  (load-theme 'cyberpunk t)
   (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
 
 (setq font-lock-maximum-decoration t)
@@ -205,7 +207,7 @@
 ;;
 ;; email configuration is kept in a separate private file:
 ;;
-(load-file "~/.emacs.private/mail.el")
+(load-file "~/.emacs.private/dc-mail.el")
 
 ;;
 ;; start emacs server
