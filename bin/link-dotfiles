@@ -60,10 +60,10 @@ if [ $OS == "Darwin" ]; then
     IFS=$SAVEIFS
 fi
 
-if [ $OS == "Linux" ]; then
-    echo "tbd"
-    # ...
-fi
+# if [ $OS == "Linux" ]; then
+#     echo "tbd"
+#     # ...
+# fi
 
 # setup generic dot files
 if [ -d ${DF}/dot ]; then

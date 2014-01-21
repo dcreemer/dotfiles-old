@@ -41,8 +41,13 @@ fi
 do_install base
 
 # if available, clone and install private and work bootstraps
-
-for m in private work ; do
+REPOS="private"
+if [ -f $HOME/.work-enabled ]; then
+    REPOS="private work"
+else
+    echo "[SKIP] not ~/.work-enabled"
+fi
+for m in $REPOS ; do
     # check Dropbox for encrypted repositories
     REPO=$HOME/Dropbox/Git/dotfiles-${m}.git
     if [ ! -r $HOME/.dotfiles-${m} ] && [ -d $REPO ]; then
