@@ -11,5 +11,6 @@ offline-imap
 pianobar
 s3cmd
 siege
+terminal-notifier
 w3m
 wget
