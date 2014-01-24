@@ -1,7 +1,7 @@
 ; based on https://gist.github.com/jamesmacaulay/5603176
 ;
 {:user {:dependencies [[org.clojure/tools.namespace "0.2.4"]
-                       [spyscope "0.1.4"]
+                       [spyscope "0.1.4" :exclusions [clj-time]]
                        [criterium "0.4.2"]]
         :injections [(require '(clojure.tools.namespace repl find))
                      ; try/catch to workaround an issue where `lein repl` outside a project dir
