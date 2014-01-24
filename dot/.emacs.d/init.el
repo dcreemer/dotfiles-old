@@ -33,6 +33,7 @@
                       clojure-test-mode
                       color-theme
                       cyberpunk-theme
+                      erc-terminal-notifier
                       find-file-in-repository
                       go-mode
                       highlight-symbol
@@ -136,6 +137,15 @@
 (global-hl-line-mode)
 
 (set-default 'fill-column 77)
+
+;; narrowing is OK
+(put 'narrow-to-defun  'disabled nil)
+(put 'narrow-to-page   'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+
+;; bind eshell, get a unique names:
+(global-set-key (kbd "C-$") '(lambda () (interactive) (eshell t)))
+(setq eshell-directory-name (concat user-emacs-directory "state/eshell"))
 
 ;;
 ;; spelling
