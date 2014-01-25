@@ -46,6 +46,7 @@
                       python-mode
                       rainbow-delimiters
                       smartparens
+                      tumblesocks
                       w3m
                       yaml-mode
                       yasnippet))
