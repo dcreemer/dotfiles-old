@@ -46,6 +46,7 @@
                       python-mode
                       rainbow-delimiters
                       smartparens
+                      smex
                       w3m
                       yaml-mode
                       yasnippet))
@@ -97,11 +98,28 @@
 (setq ido-enable-flex-matching t)
 (setq ido-save-directory-list-file (concat user-emacs-directory "state/ido.last"))
 (ido-vertical-mode 1)
+(setq ido-use-virtual-buffers t)
+
+;;
+;; smarter meta-x
+(require 'smex)
+(smex-initialize)
+(setq smex-save-file (concat user-emacs-directory "state/smex-items"))
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; return to same point in a buffer when revisiting the file:
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file (concat user-emacs-directory "state/places"))
+
+;; remember many recent files:
+(require 'recentf)
+(setq recentf-max-saved-items 200
+      recentf-max-menu-items 15)
+(recentf-mode +1)
+(global-set-key (kbd "C-c f") 'recentf-ido-find-file)
 
 ;; ensure all buffers have unique names
 (require 'uniquify)
@@ -125,27 +143,31 @@
 (when window-system
   (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
 
-(setq font-lock-maximum-decoration t)
+;; I need to edit some very large YAML files. Maximum font-lock slows that down
+(setq font-lock-maximum-decoration '((yaml-mode . nil) (t . t)))
 
-;; always show empty lines at end of buffer
+;; always show empty space at end of buffer and line
 (set-default 'indicate-empty-lines t)
+(setq show-trailing-whitespace t)
 
 ;; Use shift key to navigate windows:
 (windmove-default-keybindings 'shift)
 
 ;; make the cursor more visible:
-(global-hl-line-mode)
+;(global-hl-line-mode)
 
 (set-default 'fill-column 77)
 
-;; narrowing is OK
+;; turn on some disabled commands
 (put 'narrow-to-defun  'disabled nil)
 (put 'narrow-to-page   'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'erase-buffer     'disabled nil)
 
-;; bind eshell, get a unique names:
-(global-set-key (kbd "C-$") '(lambda () (interactive) (eshell t)))
+;; shell
+(global-set-key (kbd "C-$") '(lambda () (interactive) (ansi-term "bash")))
 (setq eshell-directory-name (concat user-emacs-directory "state/eshell"))
+(setq eshell-aliases-file (concat user-emacs-directory "eshell-aliases"))
 
 ;;
 ;; spelling
@@ -180,6 +202,12 @@
 
 ; highlight-synbols in all programming modes:
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+
+;; yasnippet
+;; (require 'yasnippet)
+;; (yas-reload-all)
+;; (add-hook 'prog-mode-hook 'yas-minor-mode)
+;; (add-hook 'markdown-mode-hook 'yas-minor-mode)
 
 ;;
 ;; clojure

@@ -30,3 +30,14 @@ by using nxml's indentation rules."
     (indent-region begin end nil)
     (normal-mode))
   (message "All indented!"))
+
+
+;; use IDO to find recent files
+;; from http://emacsredux.com/blog/2013/04/05/recently-visited-files/
+;;
+(defun recentf-ido-find-file ()
+  "Find a recent file using ido."
+  (interactive)
+  (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
+    (when file
+      (find-file file))))
