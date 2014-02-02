@@ -47,6 +47,7 @@
                       rainbow-delimiters
                       smartparens
                       smex
+                      tumblesocks
                       w3m
                       yaml-mode
                       yasnippet))

@@ -1,4 +1,4 @@
-'aspell --with-lang-en'
+aspell
 bash-completion
 curl-ca-bundle
 emacs
