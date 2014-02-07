@@ -13,13 +13,14 @@ fi
 
 case "$TERM" in
     xterm*) color_prompt=yes;;
+    eterm-color*) color_prompt=yes;;
     *) ;;
 esac
 
 if [ "$color_prompt" = yes ]; then
     PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    PS1='\u@\H:\w\$ '
+    PS1='\u@\h:\w\$ '
 fi
 unset color_prompt
 
@@ -38,6 +39,7 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # default emacs server port location on Mac OS X
 alias ec='emacsclient -s /tmp/emacs${UID}/server'
+alias ff='emacsclient -n -s /tmp/emacs${UID}/server'
 
 # virtualenv
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
