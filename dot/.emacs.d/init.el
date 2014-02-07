@@ -165,10 +165,10 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer     'disabled nil)
 
-;; shell
+;; shell -- currently favoring ansi-term
 (global-set-key (kbd "C-$") '(lambda () (interactive) (ansi-term "bash")))
-(setq eshell-directory-name (concat user-emacs-directory "state/eshell"))
-(setq eshell-aliases-file (concat user-emacs-directory "eshell-aliases"))
+;;(setq eshell-directory-name (concat user-emacs-directory "state/eshell"))
+;;(setq eshell-aliases-file (concat user-emacs-directory "eshell-aliases"))
 
 ;;
 ;; spelling
@@ -250,6 +250,13 @@
             (local-set-key "\C-c\C-d" 'jedi:show-doc)
             (local-set-key (kbd "M-SPC") 'jedi:complete)
             (setq jedi:use-shortcuts t))) ; M-. and M-,
+
+;;
+;; w3m
+;;
+;(setq browse-url-browser-function 'w3m-browse-url)
+(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+(global-set-key "\C-xw" 'browse-url-at-point)
 
 ;;
 ;; load private config:
