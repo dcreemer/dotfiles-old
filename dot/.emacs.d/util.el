@@ -41,3 +41,14 @@ by using nxml's indentation rules."
   (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
     (when file
       (find-file file))))
+
+;;
+;; insert current UTC timestamp
+;;
+(defun insert-utc ()
+  "Insert string for the current UTC time formatted like '2014-02-08T01:30:15Z'"
+  (interactive)
+  (let ((now (current-time)))
+    (set-time-zone-rule t)
+    (insert (format-time-string "%FT%TZ" now))
+    (set-time-zone-rule nil)))
