@@ -1,3 +1,6 @@
+#! /bin/bash
 # .bashrc for Darwin
 
-source ~/.bash_profile
+if [ "$TERM" == "eterm-color" ]; then
+    source ~/.bash_profile
+fi
