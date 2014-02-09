@@ -52,3 +52,13 @@ by using nxml's indentation rules."
     (set-time-zone-rule t)
     (insert (format-time-string "%FT%TZ" now))
     (set-time-zone-rule nil)))
+
+(defun google ()
+  "Googles a query or region if any."
+  (interactive)
+  (w3m-browse-url
+   (concat
+    "http://www.google.com/search?ie=utf-8&oe=utf-8&q="
+    (if (region-active-p)
+        (buffer-substring (region-beginning) (region-end))
+      (read-string "Query: ")))))

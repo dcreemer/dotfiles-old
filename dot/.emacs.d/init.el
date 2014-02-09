@@ -177,6 +177,11 @@
 (add-hook 'prog-mode-hook 'flyspell-prog-mode)
 
 ;;
+;; log files auto 'tail -f'
+;;
+(add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
+
+;;
 ;; Code Formatting Globally:
 ;;
 
@@ -200,15 +205,16 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (setq ac-comphist-file (concat user-emacs-directory "state/ac-comphist.dat"))
+(global-auto-complete-mode t)
 
 ; highlight-synbols in all programming modes:
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 
 ;; yasnippet
-;; (require 'yasnippet)
-;; (yas-reload-all)
-;; (add-hook 'prog-mode-hook 'yas-minor-mode)
-;; (add-hook 'markdown-mode-hook 'yas-minor-mode)
+(require 'yasnippet)
+(yas-reload-all)
+(add-hook 'prog-mode-hook 'yas-minor-mode)
+(add-hook 'markdown-mode-hook 'yas-minor-mode)
 
 ;;
 ;; clojure
@@ -255,8 +261,9 @@
 ;; w3m
 ;;
 ;(setq browse-url-browser-function 'w3m-browse-url)
+(setq w3m-default-display-inline-images t)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-(global-set-key "\C-xw" 'browse-url-at-point)
+(global-set-key "\C-xw" 'w3m-browse-url)
 
 ;;
 ;; load private config:
