@@ -276,7 +276,4 @@
 ;; start emacs server
 ;;
 (when window-system
-  (if dc/macosx-gui-p
-      ;; on mac os x, the server socket needs to be set
-      (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
   (server-start))

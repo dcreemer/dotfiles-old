@@ -38,8 +38,8 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 # default emacs server port location on Mac OS X
-alias ec='emacsclient -s /tmp/emacs${UID}/server'
-alias ff='emacsclient -n -s /tmp/emacs${UID}/server'
+alias ec='emacsclient'
+alias ff='emacsclient -n'
 
 # virtualenv
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
