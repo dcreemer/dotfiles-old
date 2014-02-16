@@ -5,11 +5,6 @@
 (defconst dc/macosx-gui-p
   (and window-system (eq 'darwin system-type)))
 
-;; fix the PATH variable on Mac OS X gui
-(when dc/macosx-gui-p
-  (setenv "PATH" (shell-command-to-string "source ~/.path; echo -n $PATH"))
-  (setq exec-path (append (split-string (getenv "PATH") ":") exec-path)))
-
 ;; customizations go in a separate file:
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
@@ -26,7 +21,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(ac-nrepl
+(defvar dc/packages '(ac-nrepl
                       auto-complete
                       cider
                       clojure-mode
@@ -34,6 +29,8 @@
                       color-theme
                       cyberpunk-theme
                       erc-terminal-notifier
+                      exec-path-from-shell
+                      expand-region
                       find-file-in-repository
                       go-mode
                       highlight-symbol
@@ -45,6 +42,7 @@
                       oauth
                       python-mode
                       rainbow-delimiters
+                      smart-mode-line
                       smartparens
                       smex
                       tumblesocks
@@ -52,9 +50,13 @@
                       yaml-mode
                       yasnippet))
 
-(dolist (p my-packages)
+(dolist (p dc/packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+;; fix the PATH variable on Mac OS X gui
+(when dc/macosx-gui-p
+  (exec-path-from-shell-initialize))
 
 ;;
 ;; Basic Global Keys
@@ -182,6 +184,11 @@
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
 
 ;;
+;; expand region
+;;
+(global-set-key (kbd "C-=") 'er/expand-region)
+
+;;
 ;; Code Formatting Globally:
 ;;
 
@@ -264,6 +271,13 @@
 (setq w3m-default-display-inline-images t)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
 (global-set-key "\C-xw" 'w3m-browse-url)
+
+;;
+;; smart-mode-line
+;;
+(setq sml/theme 'respectful)
+(setq sml/hidden-modes '(" SP" " hl-p" " hl-s"))
+(sml/setup)
 
 ;;
 ;; load private config:
