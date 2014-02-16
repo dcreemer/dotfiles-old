@@ -1,5 +1,6 @@
 aspell
 bash-completion
+bitlbee
 curl-ca-bundle
 emacs
 git
@@ -8,6 +9,7 @@ leiningen
 markdown
 mu
 offline-imap
+osxfuse
 pianobar
 s3cmd
 siege
