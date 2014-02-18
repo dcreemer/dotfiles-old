@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 # fetch git-remote-gcrypt to bootstrap private repos.
 grc="$HOME/bin/git-remote-gcrypt"

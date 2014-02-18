@@ -6,10 +6,7 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# path is kept in a separate file for easy use by emacs
-if [ -f $HOME/.path ]; then
-    source ~/.path
-fi
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
 
 case "$TERM" in
     xterm*) color_prompt=yes;;
