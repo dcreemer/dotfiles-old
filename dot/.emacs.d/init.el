@@ -9,6 +9,11 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file 'noerror)
 
+;; some packages are forked or copied locally. find those here:
+(let ((default-directory (concat user-emacs-directory "local-lisp/")))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
+
 ;;
 ;; packages to load and ensure
 ;;
@@ -46,6 +51,7 @@
                       smartparens
                       smex
                       tumblesocks
+                      twittering-mode
                       w3m
                       yaml-mode
                       yasnippet))
@@ -278,6 +284,37 @@
 (setq sml/theme 'respectful)
 (setq sml/hidden-modes '(" SP" " hl-p" " hl-s"))
 (sml/setup)
+
+;;
+;; in-emacs pandora client. yay.
+;;
+(require 'pianobar)
+(global-set-key (kbd "<M-f7>") 'pianobar-ban-song)
+(global-set-key (kbd "<f8>") 'pianobar-play-or-pause)
+(global-set-key (kbd "<M-f8>") '(lambda () (interactive) (pianobar-send-command ?q)))
+(global-set-key (kbd "<f9>") 'pianobar-next-song)
+(global-set-key (kbd "<M-f9>") 'pianobar-change-station)
+
+;;
+;; twitter
+;;
+(require 'twittering-mode)
+;; change storage locations to be in state/
+(setq twittering-use-master-password t
+      twittering-icon-mode t
+      twittering-use-icon-storage t
+      twittering-icon-storage-file "~/.emacs.d/state/twittering-mode-icons")
+
+;; set personal twitter information:
+(setq twittering-username "dcreemer"
+      twittering-private-info-file "~/.emacs.private/twittering-mode.gpg")
+
+;; on macos with brew, cert file must be specified:
+(setq twittering-cert-file
+      (cond
+       ((string= system-type "darwin") "/usr/local/etc/openssl/cert.pem")
+       ((string= system-type "berkeley-unix") "/usr/local/share/certs/ca-root-nss.crt")
+       (t nil)))
 
 ;;
 ;; load private config:
