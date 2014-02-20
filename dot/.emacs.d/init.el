@@ -165,7 +165,7 @@
 ;; make the cursor more visible:
 ;(global-hl-line-mode)
 
-(set-default 'fill-column 77)
+(set-default 'fill-column 120)
 
 ;; turn on some disabled commands
 (put 'narrow-to-defun  'disabled nil)
@@ -227,7 +227,10 @@
 (require 'yasnippet)
 (yas-reload-all)
 (add-hook 'prog-mode-hook 'yas-minor-mode)
+
+;; markdown:
 (add-hook 'markdown-mode-hook 'yas-minor-mode)
+(add-hook 'markdown-mode-hook 'auto-fill-mode)
 
 ;;
 ;; clojure
