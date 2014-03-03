@@ -126,7 +126,8 @@
 ;; remember many recent files:
 (require 'recentf)
 (setq recentf-max-saved-items 200
-      recentf-max-menu-items 15)
+      recentf-max-menu-items 15
+      recentf-save-file (concat user-emacs-directory "state/recentf"))
 (recentf-mode +1)
 (global-set-key (kbd "C-c f") 'recentf-ido-find-file)
 
