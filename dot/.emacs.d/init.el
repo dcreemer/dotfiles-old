@@ -210,6 +210,8 @@
 
 (require 'smartparens-config)
 (smartparens-global-mode 1)
+(setq sp-autoescape-string-quote-if-empty '(python-mode))
+
 (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
 (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
 (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
@@ -272,7 +274,16 @@
             (setq jedi:complete-on-dot t)
             (local-set-key "\C-c\C-d" 'jedi:show-doc)
             (local-set-key (kbd "M-SPC") 'jedi:complete)
-            (setq jedi:use-shortcuts t))) ; M-. and M-,
+            (setq jedi:use-shortcuts t)
+            (setq show-trailing-whitespace t))
+          ) ; M-. and M-,
+
+;;
+;; line numbering
+;;
+(require 'linum)
+(global-linum-mode t)
+
 
 ;;
 ;; w3m
