@@ -274,7 +274,9 @@
             (setq jedi:complete-on-dot t)
             (local-set-key "\C-c\C-d" 'jedi:show-doc)
             (local-set-key (kbd "M-SPC") 'jedi:complete)
-            (setq jedi:use-shortcuts t))) ; M-. and M-,
+            (setq jedi:use-shortcuts t)
+            (setq show-trailing-whitespace t))
+          ) ; M-. and M-,
 
 ;;
 ;; w3m
