@@ -210,6 +210,8 @@
 
 (require 'smartparens-config)
 (smartparens-global-mode 1)
+(setq sp-autoescape-string-quote-if-empty '(python-mode))
+
 (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
 (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
 (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
