@@ -279,6 +279,13 @@
           ) ; M-. and M-,
 
 ;;
+;; line numbering
+;;
+(require 'linum)
+(global-linum-mode t)
+
+
+;;
 ;; w3m
 ;;
 ;(setq browse-url-browser-function 'w3m-browse-url)
