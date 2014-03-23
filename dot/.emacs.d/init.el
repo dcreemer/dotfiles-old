@@ -88,6 +88,13 @@
 (setq auto-save-list-file-prefix (concat user-emacs-directory "state/auto-save-list/.saves-"))
 
 ;;
+;; save and restore sessions
+;;
+(setq savehist-file (concat user-emacs-directory "state/history"))
+(setq savehist-additional-variables '(kill-ring))
+(savehist-mode 1)
+
+;;
 ;; load custom functions
 ;;
 (load-file (concat user-emacs-directory "util.el"))
