@@ -33,6 +33,7 @@
                       clojure-test-mode
                       color-theme
                       cyberpunk-theme
+                      deft
                       erc-terminal-notifier
                       exec-path-from-shell
                       expand-region
@@ -206,6 +207,15 @@
 ;; expand region
 ;;
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+;; deft
+(require 'deft)
+(setq deft-extension "md"
+      deft-text-mode 'markdown-mode
+      deft-directory "~/Documents/Notes"
+      deft-use-filename-as-title nil)
+(global-set-key (kbd "<f4>") 'deft)
+(global-set-key (kbd "<f13>") 'deft)
 
 ;;
 ;; Code Formatting Globally:
