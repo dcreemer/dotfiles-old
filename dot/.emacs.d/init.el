@@ -239,13 +239,13 @@
 (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
 (define-key sp-keymap (kbd "C-M-p") 'sp-previous-sexp)
 
-; auto-completion everywhere
+;; auto-completion everywhere
 (require 'auto-complete-config)
 (ac-config-default)
 (setq ac-comphist-file (concat user-emacs-directory "state/ac-comphist.dat"))
 (global-auto-complete-mode t)
 
-; highlight-synbols in all programming modes:
+;; highlight-synbols in all programming modes
 (add-hook 'prog-mode-hook 'highlight-symbol-mode)
 
 ;; yasnippet
@@ -253,7 +253,7 @@
 (yas-reload-all)
 (add-hook 'prog-mode-hook 'yas-minor-mode)
 
-;; markdown:
+;; markdown
 (add-hook 'markdown-mode-hook 'yas-minor-mode)
 (add-hook 'markdown-mode-hook 'auto-fill-mode)
 
@@ -345,7 +345,7 @@
        (t nil)))
 
 ;;
-;; load private config:
+;; load private configuration
 ;;
 (setq dc/private-emacs-dir "~/.emacs.private/")
 (when (file-exists-p dc/private-emacs-dir)
