@@ -230,8 +230,10 @@
 (column-number-mode)
 (global-rainbow-delimiters-mode)
 
+;; smart parens everywhere, but I don't like the auto-escaping of quotes in quotes
 (require 'smartparens-config)
 (smartparens-global-mode 1)
+(setq sp-autoescape-string-quote nil)
 (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
 (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
 (define-key sp-keymap (kbd "C-M-n") 'sp-next-sexp)
