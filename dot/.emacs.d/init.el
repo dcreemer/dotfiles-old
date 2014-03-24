@@ -327,22 +327,23 @@
 ;; twitter
 ;;
 (require 'twittering-mode)
-;; change storage locations to be in state/
-(setq twittering-use-master-password t
-      twittering-icon-mode t
+(setq twittering-icon-mode t
       twittering-use-icon-storage t
-      twittering-icon-storage-file "~/.emacs.d/state/twittering-mode-icons")
+      twittering-icon-storage-file "~/.emacs.d/state/twittering-mode-icons"
+      twittering-cert-file (cond
+                            ((string= system-type "darwin") "/usr/local/etc/openssl/cert.pem")
+                            ((string= system-type "berkeley-unix") "/usr/local/share/certs/ca-root-nss.crt")
+                            (t nil)))
 
-;; set personal twitter information:
-(setq twittering-username "dcreemer"
-      twittering-private-info-file "~/.emacs.private/twittering-mode.gpg")
+;;
+;; bitlbee / erc
+;;
+(require 'erc-terminal-notifier)
 
-;; on macos with brew, cert file must be specified:
-(setq twittering-cert-file
-      (cond
-       ((string= system-type "darwin") "/usr/local/etc/openssl/cert.pem")
-       ((string= system-type "berkeley-unix") "/usr/local/share/certs/ca-root-nss.crt")
-       (t nil)))
+(defun dc/chat ()
+  "start local chat proxy"
+  (interactive)
+  (erc :server "localhost" :port 6667 :nick bitlbee-erc-username :password bitlbee-erc-password))
 
 ;;
 ;; load private configuration
