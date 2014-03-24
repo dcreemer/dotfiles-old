@@ -94,6 +94,11 @@
 (setq savehist-additional-variables '(kill-ring))
 (savehist-mode 1)
 
+(setq desktop-path (list (concat user-emacs-directory "state"))
+      desktop-base-file-name "emacs.desktop"
+      desktop-restore-frames t)
+(desktop-save-mode 1)
+
 ;;
 ;; load custom functions
 ;;
