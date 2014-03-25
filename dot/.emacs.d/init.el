@@ -167,7 +167,7 @@
   (set-face-attribute 'default nil :font "DejaVu Sans Mono-12"))
 
 ;; I need to edit some very large YAML files. Maximum font-lock slows that down
-(setq font-lock-maximum-decoration '((yaml-mode . nil) (t . t)))
+(setq font-lock-maximum-decoration '((yaml-mode . 1) (t . t)))
 
 ;; always show empty space at end of buffer and line
 (set-default 'indicate-empty-lines t)
