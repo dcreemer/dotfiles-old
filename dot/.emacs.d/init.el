@@ -188,10 +188,11 @@
 (put 'narrow-to-region 'disabled nil)
 (put 'erase-buffer     'disabled nil)
 
-;; shell -- currently favoring ansi-term
-(global-set-key (kbd "C-$") '(lambda () (interactive) (ansi-term "bash")))
-;;(setq eshell-directory-name (concat user-emacs-directory "state/eshell"))
-;;(setq eshell-aliases-file (concat user-emacs-directory "eshell-aliases"))
+;; shell -- currently favoring eshell
+;;(global-set-key (kbd "C-$") '(lambda () (interactive) (ansi-term "bash")))
+(global-set-key (kbd "C-$") 'eshell)
+(setq eshell-directory-name (concat user-emacs-directory "state/eshell"))
+(setq eshell-aliases-file (concat user-emacs-directory "eshell-aliases"))
 
 ;;
 ;; spelling
