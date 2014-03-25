@@ -179,7 +179,8 @@
 ;; make the cursor more visible:
 ;(global-hl-line-mode)
 
-(set-default 'fill-column 120)
+;; fill column is 1/2 full screen w/with two side-by-side windows on my mac:
+(set-default 'fill-column 95)
 
 ;; turn on some disabled commands
 (put 'narrow-to-defun  'disabled nil)
