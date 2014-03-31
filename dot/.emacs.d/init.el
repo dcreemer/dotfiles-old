@@ -220,6 +220,12 @@
 (global-set-key (kbd "<f13>") 'deft)
 
 ;;
+;; Org
+;;
+(setq org-startup-indented t
+      org-startup-folded "showall")
+
+;;
 ;; Code Formatting Globally:
 ;;
 
