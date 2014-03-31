@@ -212,8 +212,8 @@
 
 ;; deft
 (require 'deft)
-(setq deft-extension "md"
-      deft-text-mode 'markdown-mode
+(setq deft-extension "txt"
+      deft-text-mode 'org-mode
       deft-directory "~/Documents/Notes"
       deft-use-filename-as-title nil)
 (global-set-key (kbd "<f4>") 'deft)
