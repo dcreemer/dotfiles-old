@@ -273,8 +273,6 @@
 (add-hook 'clojure-mode-hook 'subword-mode) ; allow for CamelCase
 (add-hook 'clojure-mode-hook 'auto-complete-mode)
 (add-hook 'cider-repl-mode-hook 'subword-mode)
-(add-hook 'cider-repl-mode-hook 'smartparens-mode)
-(add-hook 'cider-repl-mode-hook 'auto-complete-mode)
 (add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
 (add-hook 'cider-mode-hook 'ac-nrepl-setup)
 (eval-after-load "auto-complete"
