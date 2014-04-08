@@ -45,6 +45,7 @@
                       jedi
                       magit
                       markdown-mode
+                      multiple-cursors
                       oauth
                       python-mode
                       rainbow-delimiters
@@ -210,7 +211,19 @@
 ;;
 (global-set-key (kbd "C-=") 'er/expand-region)
 
+;;
+;; multiple-cursors
+;;
+(require 'multiple-cursors)
+;; suggested defaults from https://github.com/magnars/multiple-cursors.el
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;;
 ;; deft
+;;
 (require 'deft)
 (setq deft-extension "txt"
       deft-text-mode 'org-mode
