@@ -282,7 +282,7 @@
 ;;
 ;; clojure
 ;;
-(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(add-hook 'cider-mode-hook 'eldoc-mode)
 (setq nrepl-hide-special-buffers t)
 (add-hook 'clojure-mode-hook 'subword-mode) ; allow for CamelCase
 (add-hook 'clojure-mode-hook 'auto-complete-mode)
