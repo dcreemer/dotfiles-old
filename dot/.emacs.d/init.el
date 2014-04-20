@@ -41,6 +41,7 @@
                       go-mode
                       highlight-symbol
                       htmlize
+                      httprepl
                       ido-vertical-mode
                       jedi
                       magit
