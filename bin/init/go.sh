@@ -3,6 +3,7 @@
 # (re-)bootstrap an environment
 # init a new machine with "bash <(curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh)"
 # can be safely re-run
+# on FreeBSD assumes pkg, sudo and bash are installed
 
 set -o nounset
 set -o errexit
@@ -88,8 +89,7 @@ bootstrap_git()
                 brew install git
                 ;;
             "FreeBSD")
-                # note: assumes sudo and pkg
-                sudo pkg install git
+                sudo pkg install -y git
                 ;;
         esac
     fi

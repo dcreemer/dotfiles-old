@@ -1,0 +1,11 @@
+pkg
+sudo
+git
+bash
+bash-completion
+curl
+aspell
+en-aspell
+emacs-nox11
+go
+python27
