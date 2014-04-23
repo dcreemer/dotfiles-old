@@ -3,7 +3,6 @@
 # Linux base pre-installation script
 
 set -o nounset
-set -o errexit
 
 # fetch git-remote-gcrypt to bootstrap private repos.
 grc="$HOME/bin/git-remote-gcrypt"
@@ -21,3 +20,5 @@ for p in $(cat $HOME/.dotfiles-base/Linux/packages) ; do
         sudo apt-get install -y $p
     fi
 done
+
+return 0

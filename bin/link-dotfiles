@@ -53,19 +53,6 @@ if [ ! -d $HOME/bin ]; then
     mkdir $HOME/bin
 fi
 
-if [ $OS == "Darwin" ]; then
-    # link 'subl' to sublime text
-    SAVEIFS=$IFS
-    IFS=$(echo -en "\n\b")
-    symlink "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/bin/subl"
-    IFS=$SAVEIFS
-fi
-
-# if [ $OS == "Linux" ]; then
-#     echo "tbd"
-#     # ...
-# fi
-
 # setup generic dot files
 if [ -d ${DF}/dot ]; then
     for src_f in $(ls -ad ${DF}/dot/.[a-z]*) ; do
