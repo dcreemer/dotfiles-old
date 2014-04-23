@@ -31,6 +31,18 @@ do_install()
 
 echo "[START]"
 
+# test for git
+OS=`uname`
+
+if [[ ! -x `which git` ]]; then
+  echo "[INSTALL] installing git"
+  if [ $OS == "Linux" ]; then
+    sudo apt-get -y install git
+  else if [ $OS == "Darwin" ]; then
+    brew install git
+  fi
+fi
+
 # fetch dotfiles-base
 if [ ! -r $HOME/.dotfiles-base ]; then
   echo "[CLONE] dotfiles-base"
