@@ -20,5 +20,3 @@ for p in $(cat $HOME/.dotfiles-base/Linux/packages) ; do
         sudo apt-get install -y $p
     fi
 done
-
-return 0

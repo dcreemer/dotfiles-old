@@ -50,5 +50,3 @@ SAVEIFS=$IFS
 IFS=$(echo -en "\n\b")
 symlink "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/bin/subl"
 IFS=$SAVEIFS
-
-return 0
