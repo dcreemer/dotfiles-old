@@ -4,72 +4,112 @@
 # init a new machine with "bash <(curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh)"
 # can be safely re-run
 
+set -o nounset
+set -o errexit
+
+TARGETS=$@
+OS=`uname`
+
+# list of target -> repository URL; functions as a map
+REPOS=( "base __ git://github.com/dcreemer/dotfiles.git"
+        "private __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-private.git"
+        "work __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-work.git" )
+
+set_targets()
+{
+    # set the targets to be fetched and installed. The list of all targets are the keys of the
+    # "REPOS" 'map'. Defaults to only "base"; use '--all' to run all targets
+    if [[ $TARGETS == "" ]]; then
+        TARGETS="base"
+    elif [[ $TARGETS == "--all" ]]; then
+        TARGETS=" "
+        for pair in "${REPOS[@]}" ; do
+            TARGETS="$TARGETS ${pair%% __ *}"
+        done
+    fi
+}
+
+get_repo()
+{
+    # given a target name, fetch the repo URL
+    local k=$1
+    REPO=""
+    for pair in "${REPOS[@]}" ; do
+        if [[ $k == "${pair%% __ *}" ]]; then
+            REPO="${pair##* __ }"
+        fi
+    done
+}
+
 do_install()
 {
-    # run pre-install hook, install and run post-install hook
-    # for the given param
-    m=$1
-    DF=$HOME/.dotfiles-${m}
+    # run pre-install hook, install files, and then run post-install hook
+    # for the given target
+    local m=$1
+    local df=$HOME/.dotfiles-${m}
     
-    if [ -d $DF ]; then
+    if [ -d $df ]; then
         
         # run pre-install hook
-        if [ -r ${DF}/pre-install.sh ]; then
-            ${DF}/pre-install.sh
+        if [ -r ${df}/pre-install.sh ]; then
+            ${df}/pre-install.sh
         fi
 
         # install
         $HOME/.dotfiles-base/bin/link-dotfiles $m
 
         # run post-install hook
-        if [ -r ${DF}/post-install.sh ]; then
-            ${DF}/post-install.sh
+        if [ -r ${df}/post-install.sh ]; then
+            ${df}/post-install.sh
         fi
         
     fi
 }
 
-echo "[START]"
-
-# test for git
-OS=`uname`
-
-if [[ ! -x `which git` ]]; then
-  echo "[INSTALL] installing git"
-  if [ $OS == "Linux" ]; then
-    sudo apt-get -y install git
-  elif [ $OS == "Darwin" ]; then
-    brew install git
-  fi
-fi
-
-# fetch dotfiles-base
-if [ ! -r $HOME/.dotfiles-base ]; then
-  echo "[CLONE] dotfiles-base"
-  git clone git://github.com/dcreemer/dotfiles.git $HOME/.dotfiles-base
-fi
-
-# install
-do_install base
-
-# if available, clone and install private and work bootstraps
-REPOS="private"
-if [ -f $HOME/.work-enabled ]; then
-    REPOS="private work"
-else
-    echo "[SKIP] not ~/.work-enabled"
-fi
-for m in $REPOS ; do
-    # check Dropbox for encrypted repositories
-    REPO=$HOME/Dropbox/Git/dotfiles-${m}.git
-    if [ ! -r $HOME/.dotfiles-${m} ] && [ -d $REPO ]; then
-        # clone:
-        echo "[CLONE] dotfiles-${m}"
-        git clone gcrypt::rsync://${REPO} $HOME/.dotfiles-${m}
-
-        # install:
-        do_install $m
+bootstrap_git()
+{
+    # check to see if git is installed, and if not, install it.
+    if [[ ! -x `which git` ]]; then
+        echo "[INSTALL] installing git"
+        case $OS in
+            "Linux")
+                sudo apt-get -y install git
+                ;;
+            "Darwin")
+                brew install git
+                ;;
+            "FreeBSD")
+                # note: assumes sudo and pkg
+                sudo pkg install git
+                ;;
+        esac
     fi
-done
+}
 
+fetch_repo()
+{
+    # given a target name, fetch the repository 
+    local m=$1
+    local target="$HOME/.dotfiles-$m"
+    if [ ! -r $target ]; then
+        echo "[CLONE] dotfiles-$name"
+        get_repo $m
+        git clone $REPO $target
+    fi
+}
+
+execute_targets()
+{
+    for t in $TARGETS ; do
+        echo "[TARGET] $t"
+        fetch_repo $t
+        do_install $t
+    done
+}
+
+# main program
+echo "[START]"
+bootstrap_git
+set_targets
+execute_targets
 echo "[DONE]"
