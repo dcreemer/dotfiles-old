@@ -32,7 +32,7 @@ Executing:
 ```
 ~/bin/init/go.sh --all
 ```
-will install and initialize all know configurations in the order specified in ```go.sh```.
+will install and initialize all listed configurations in the order specified in ```go.sh```.
 
 I store my non-public git repositories encrpyted with GPG and
 [git-remote-gcrypt](https://github.com/joeyh/git-remote-gcrypt) on Dropbox --
