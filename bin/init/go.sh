@@ -51,18 +51,26 @@ do_install()
     if [ -d $df ]; then
         
         # run pre-install hook
-        if [ -r ${df}/pre-install.sh ]; then
-            ${df}/pre-install.sh
+        if [ -r ${df}/${OS}/pre-install.sh ]; then
+            ${df}/${OS}/pre-install.sh
         fi
 
         # install
         $HOME/.dotfiles-base/bin/link-dotfiles $m
 
         # run post-install hook
-        if [ -r ${df}/post-install.sh ]; then
-            ${df}/post-install.sh
+        if [ -r ${df}/${OS}/post-install.sh ]; then
+            ${df}/${OS}/post-install.sh
         fi
         
+    fi
+}
+
+bootstrap_homebrew()
+{
+    # install homebrew if needed
+    if [ ! -x /usr/local/bin/brew ]; then
+        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     fi
 }
 
@@ -76,6 +84,7 @@ bootstrap_git()
                 sudo apt-get -y install git
                 ;;
             "Darwin")
+                bootstrap_homebrew
                 brew install git
                 ;;
             "FreeBSD")

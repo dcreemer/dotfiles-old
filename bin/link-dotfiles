@@ -1,9 +1,10 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 #
 # symlink git-stored dotfiles into home directory
 # adapted from github.com/technomancy/dotfiles
 
-set -e
+set -o nounset
+set -o errexit
 
 # how are we called?
 case "$1" in

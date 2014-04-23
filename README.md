@@ -14,10 +14,25 @@ needed for a basic install. The ```go.sh``` command above will clone this
 repository into ```$HOME/.dotfiles-base```, and then execute commands to
 create symlinks for the various dotfiles and commands.
 
-This bootstrap process will possibly then be repeated for "private" and
-"work" environments, each with further environment customizations. In
-addition to installing symlinks, ```pre-install.sh``` and
-```post-install.sh``` hook scripts will be executed if found.
+This bootstrap process will possibly then be repeated for other named repositories, as
+specified in the ```go.sh``` script. By default I have set them to "private" and "work"
+environments, each with further environment customizations. In addition to installing symlinks,
+a platform-specific ```pre-install.sh``` and ```post-install.sh``` hook scripts will be
+executed if found.
+
+Executing:
+
+```
+~/bin/init/go.sh work
+```
+will install and initialize the ```work``` configuration.
+
+Executing:
+
+```
+~/bin/init/go.sh --all
+```
+will install and initialize all know configurations in the order specified in ```go.sh```.
 
 I store my non-public git repositories encrpyted with GPG and
 [git-remote-gcrypt](https://github.com/joeyh/git-remote-gcrypt) on Dropbox --
