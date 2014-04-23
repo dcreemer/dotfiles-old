@@ -1,6 +1,6 @@
 gnupg
+pinentry-curses
 gnupg-agent
 emacs24-nox
 aspell
 aspell-en
-mu4e
