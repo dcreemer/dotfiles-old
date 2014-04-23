@@ -92,7 +92,7 @@ fetch_repo()
     local m=$1
     local target="$HOME/.dotfiles-$m"
     if [ ! -r $target ]; then
-        echo "[CLONE] dotfiles-$name"
+        echo "[CLONE] dotfiles-$m"
         get_repo $m
         git clone $REPO $target
     fi
