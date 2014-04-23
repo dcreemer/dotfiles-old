@@ -32,7 +32,7 @@ if [ $OS == "Linux" ]; then
         dpkg -l $p >/dev/null 2>&1
         if [ $? -ne 0 ]; then
             echo "[INSTALL] $p"
-            #sudo apt-get install -y $p
+            sudo apt-get install -y $p
         fi
     done
 fi
