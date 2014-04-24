@@ -7,13 +7,13 @@ System configuration and bootstrap. To install the environment on Linux or Mac O
 bash <(curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh)
 ```
 
-on FreeBSD, a small amount of addition work is needed. First as root:
+on FreeBSD, a small amount of pre-work is needed. As root:
 
 ```
 pkg install sudo bash curl
 ```
 
-Remember to configure sudo (with visudo) appropriately. Then as your regular user:
+(and remember to configure sudo with visudo appropriately). Then as your regular user:
 
 ```
 curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh | bash
