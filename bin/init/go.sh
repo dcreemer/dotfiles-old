@@ -17,19 +17,9 @@ REPOS=( "base __ git://github.com/dcreemer/dotfiles.git"
         "private __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-private.git"
         "work __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-work.git" )
 
-set_targets()
-{
-    # set the targets to be fetched and installed. The list of all targets are the keys of the
-    # "REPOS" 'map'. Defaults to only "base"; use '--all' to run all targets
-    if [[ $TARGETS == "" ]]; then
-        TARGETS="base"
-    elif [[ $TARGETS == "--all" ]]; then
-        TARGETS=" "
-        for pair in "${REPOS[@]}" ; do
-            TARGETS="$TARGETS ${pair%% __ *}"
-        done
-    fi
-}
+##
+## bootstrap everything we need
+##
 
 bootstrap()
 {
@@ -61,6 +51,24 @@ bootstrap()
     fi
 }
 
+##
+## setup the list of targets and corresponding git repositories we will install
+##
+
+set_targets()
+{
+    # set the targets to be fetched and installed. The list of all targets are the keys of the
+    # "REPOS" 'map'. Defaults to only "base"; use '--all' to run all targets
+    if [[ $TARGETS == "" ]]; then
+        TARGETS="base"
+    elif [[ $TARGETS == "--all" ]]; then
+        TARGETS=" "
+        for pair in "${REPOS[@]}" ; do
+            TARGETS="$TARGETS ${pair%% __ *}"
+        done
+    fi
+}
+
 get_repo_url()
 {
     # given a target name, fetch the repo URL
@@ -85,6 +93,62 @@ fetch_repo()
     fi
 }
 
+##
+## linking files into place
+##
+
+link_files()
+{
+    # given a target, link all the files
+    local target=$1
+    for kind in dot bin; do
+        # link generic and OS-specific files
+        link_subdir $kind $target
+        link_subdir $kind $target/$OS
+    done
+}
+
+link_subdir()
+{
+    # called as link_subdir (bin|dot) sourcedir, where sourcedir is like "base/Darwin" or "base"
+    local kind=$1
+    local source_dir=${DF}/$2/${kind}
+    local files=$(/bin/ls -a ${source_dir})
+    local targ_dir="${HOME}"
+    if [[ ! $kind == "dot" ]]; then
+        targ_dir="${HOME}/${kind}"
+    fi
+    for src_f in $files; do
+        local targ_f=`basename $src_f`
+        if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
+            symlink ${source_dir}/${src_f} ${targ_dir}/${targ_f}
+        fi
+    done
+}
+
+symlink()
+{
+    src=$1
+    targ=$2
+    # if we have a good source, target
+    if [ ! -z "$src" ] && [ ! -z "$targ" ]; then
+        if [ ! -h $targ ]; then
+            # if it's not a symlink already...
+            if [ -r $targ ]; then
+                # but is there, then remove it
+                rm -rf $targ
+            fi
+            # and symlink it
+            echo "[LINK]  $targ"
+            ln -s $src $targ
+        fi
+    fi
+}
+
+##
+## installation
+##
+
 do_install()
 {
     # run pre-install hook, install files, and then run post-install hook
@@ -98,7 +162,7 @@ do_install()
             ${target_os_dir}/pre-install.sh
         fi
         # install
-        $DF/base/bin/link-dotfiles $target
+        link_files $target
         # run post-install hook
         if [ -r ${target_os_dir}/post-install.sh ]; then
             ${target_os_dir}/post-install.sh

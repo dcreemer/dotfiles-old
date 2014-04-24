@@ -7,11 +7,17 @@ System configuration and bootstrap. To install the environment on a new computer
 bash <(curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh)
 ```
 
+on FreeBSD use:
+
+```
+curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh | bash
+```
+
 This project bootstraps a new computer to a workable, personalized system
 with as little manual configuration as possible. This repo contains
 personalized "dotfiles", a local ```$HOME/bin``` directory, and other files
 needed for a basic install. The ```go.sh``` command above will clone this
-repository into ```$HOME/.dotfiles-base```, and then execute commands to
+repository into ```$HOME/.dotfiles/base```, and then execute commands to
 create symlinks for the various dotfiles and commands.
 
 This bootstrap process will possibly then be repeated for other named repositories, as
