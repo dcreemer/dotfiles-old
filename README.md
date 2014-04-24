@@ -1,13 +1,19 @@
 dotfiles
 ========
 
-System configuration and bootstrap. To install the environment on a new computer, execute:
+System configuration and bootstrap. To install the environment on Linux or Mac OS X, execute:
 
 ```
 bash <(curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh)
 ```
 
-on FreeBSD use:
+on FreeBSD, a small amount of addition work is needed. First as root:
+
+```
+pkg install sudo bash curl
+```
+
+Remember to configure sudo (with visudo) appropriately. Then as your regular user:
 
 ```
 curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh | bash
@@ -20,11 +26,11 @@ needed for a basic install. The ```go.sh``` command above will clone this
 repository into ```$HOME/.dotfiles/base```, and then execute commands to
 create symlinks for the various dotfiles and commands.
 
-This bootstrap process will possibly then be repeated for other named repositories, as
-specified in the ```go.sh``` script. By default I have set them to "private" and "work"
-environments, each with further environment customizations. In addition to installing symlinks,
-a platform-specific ```pre-install.sh``` and ```post-install.sh``` hook scripts will be
-executed if found.
+This bootstrap process can then be repeated for other named repositories, as specified as
+arguments to the ```go.sh``` script. By default "private" and "work" respositories are
+configured in the script, each with further customizations. In addition to connecting symlinks
+and installing packages, platform-specific ```pre-install.sh``` and ```post-install.sh``` hook
+scripts will be executed if found.
 
 Executing:
 

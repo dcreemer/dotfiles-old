@@ -3,7 +3,7 @@
 # (re-)bootstrap an environment
 # init a new machine with "bash <(curl -fsSL https://raw.github.com/dcreemer/dotfiles/master/bin/init/go.sh)"
 # can be safely re-run
-# on FreeBSD assumes pkg, sudo and bash are installed
+# on FreeBSD assumes pkg, sudo, bash, and curl are installed
 
 set -o nounset
 
