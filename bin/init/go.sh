@@ -12,9 +12,9 @@ OS=`uname`
 DF=$HOME/.dotfiles
 
 # list of target -> repository URL; functions as a map
-REPOS=( "base __ git://github.com/dcreemer/dotfiles.git"
+REPOS=(    "base __ git://github.com/dcreemer/dotfiles.git"
         "private __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-private.git"
-        "work __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-work.git" )
+           "work __ gcrypt::rsync:///Users/dcreemer/Dropbox/Git/dotfiles-work.git" )
 
 ##
 ## bootstrap everything we need
@@ -46,7 +46,6 @@ bootstrap()
     esac
     # check to see if git is installed, and if not, install it.
     if [[ ! -x `which git` ]]; then
-        echo "[INSTALL] installing git"
         install_package git
     fi
 }
