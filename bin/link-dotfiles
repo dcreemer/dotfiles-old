@@ -41,20 +41,21 @@ link_subdir()
 {
     # called as link_subdir (bin|dot) sourcedir, where sourcedir is like "base/Darwin" or "base"
     local kind=$1
-    local source_dir=$2
-    local files=$(/bin/ls -a ${DF}/${source_dir}/${kind})
+    local source_dir=${DF}/$2/${kind}
+    local files=$(/bin/ls -a ${source_dir})
     for src_f in $files; do
         local targ_f=`basename $src_f`
         if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
-            echo "symlink $src_f <- $HOME/${targ_f}"
+            symlink ${source_dir}/${src_f} ${HOME}/${targ_f}
         fi
     done
 }
 
+check_targets
 # for every target
 for target in $TARGETS; do
     # for every kind:
-    for kind in "dot bin"; do
+    for kind in dot bin; do
         # link generic and OS-specific files
         link_subdir $kind $target
         link_subdir $kind $target/$OS
