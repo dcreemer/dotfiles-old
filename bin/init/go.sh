@@ -6,7 +6,6 @@
 # on FreeBSD assumes pkg, sudo and bash are installed
 
 set -o nounset
-set -o errexit
 
 TARGETS=$@
 OS=`uname`
@@ -96,7 +95,7 @@ install_bsd_pkg()
     pkg info -e $p
     if [ $? -eq 1 ]; then
         echo "[INSTALL] $p"
-        sudo pkg install -y $p
+        sudo pkg install -U -y $p
     fi
 }
 
