@@ -117,7 +117,7 @@ execute_targets()
 
 # main program
 echo "[START]"
-bootstrap_git
+bootstrap
 set_targets
 execute_targets
 echo "[DONE]"
