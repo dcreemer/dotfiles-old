@@ -101,7 +101,7 @@ do_install()
         $DF/base/bin/link-dotfiles $target
         # run post-install hook
         if [ -r ${target_os_dir}/post-install.sh ]; then
-            ${target_os_dir}}/post-install.sh
+            ${target_os_dir}/post-install.sh
         fi
     fi
 }
