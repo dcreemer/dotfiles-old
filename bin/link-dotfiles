@@ -43,10 +43,14 @@ link_subdir()
     local kind=$1
     local source_dir=${DF}/$2/${kind}
     local files=$(/bin/ls -a ${source_dir})
+    local targ_dir="${HOME}"
+    if [[ ! $kind == "dot" ]]; then
+        targ_dir="${HOME}/${kind}"
+    fi
     for src_f in $files; do
         local targ_f=`basename $src_f`
         if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
-            symlink ${source_dir}/${src_f} ${HOME}/${targ_f}
+            symlink ${source_dir}/${src_f} ${targ_dir}${targ_f}
         fi
     done
 }
