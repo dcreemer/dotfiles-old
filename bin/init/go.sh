@@ -23,31 +23,80 @@ REPOS=( "base __ git://github.com/dcreemer/dotfiles.git"
 
 bootstrap()
 {
-    # ensure base and bin dirs
-    if [[ ! -d $DF ]]; then
-        mkdir -p $DF
-    fi
-    if [ ! -d $HOME/bin ]; then
-        mkdir $HOME/bin
-    fi
+    # ensure all dirs are present:
+    for dir in $DF $HOME/bin ; do
+        if [[ ! -d $dir ]]; then
+            mkdir -p $dir
+        fi
+    done
+    # ensure package managers are installed and up to date:
+    case $OS in
+        "Linux")
+            sudo apt-get update
+            ;;
+        "Darwin")
+            # install homebrew if needed
+            if [ ! -x /usr/local/bin/brew ]; then
+                ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+            fi
+            brew update
+            ;;
+        "FreeBSD")
+            sudo pkg update
+            ;;
+    esac
     # check to see if git is installed, and if not, install it.
     if [[ ! -x `which git` ]]; then
         echo "[INSTALL] installing git"
-        case $OS in
-            "Linux")
-                sudo apt-get -y install git
-                ;;
-            "Darwin")
-                # install homebrew if needed
-                if [ ! -x /usr/local/bin/brew ]; then
-                    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-                fi
-                brew install git
-                ;;
-            "FreeBSD")
-                sudo pkg install -y git
-                ;;
-        esac
+        install_package git
+    fi
+}
+
+install_package()
+{
+    local pkg=$1
+    case $OS in
+        "Linux")
+            install_apt_pkg $pkg
+            ;;
+        "Darwin")
+            install_brew_pkg $pkg
+            ;;
+        "FreeBSD")
+            install_bsd_pkg $pkg
+            ;;
+    esac
+}
+
+install_apt_pkg()
+{
+    # install an apt-based package (if it doesn't exist)
+    local p=$1
+    dpkg -l $p >/dev/null 2>&1
+    if [ $? -ne 0 ]; then
+        echo "[INSTALL] $p"
+        sudo apt-get install -y $p
+    fi
+}
+
+install_brew_pkg()
+{
+    # install a brew-based package (if it doesn't exist)
+    local p=$1
+    if [ ! -d /usr/local/Cellar/${p} ]; then
+        echo "[INSTALL] $p"
+        brew install $p
+    fi
+}
+
+install_bsd_pkg()
+{
+    # install a freebsd pkg-based package (if it doesn't exist)
+    local p=$1
+    pkg info -e $p
+    if [ $? -eq 1 ]; then
+        echo "[INSTALL] $p"
+        sudo pkg install -y $p
     fi
 }
 
@@ -161,12 +210,23 @@ do_install()
         if [ -r ${target_os_dir}/pre-install.sh ]; then
             ${target_os_dir}/pre-install.sh
         fi
-        # install
+        # install:
         link_files $target
+        install_packages $target
         # run post-install hook
         if [ -r ${target_os_dir}/post-install.sh ]; then
             ${target_os_dir}/post-install.sh
         fi
+    fi
+}
+
+install_packages()
+{
+    local pkgs="${DF}/$1/${OS}/packages"
+    if [[ -r $pkgs ]]; then
+        for p in $(cat pkgs) ; do
+            install_package $p
+        done
     fi
 }
 

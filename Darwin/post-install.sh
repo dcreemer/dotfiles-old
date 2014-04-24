@@ -4,14 +4,6 @@
 
 set -o nounset
 
-# install brew packages:
-for p in $(cat $HOME/.dotfiles/base/Darwin/packages) ; do
-    if [ ! -d /usr/local/Cellar/${p} ]; then
-        echo "[INSTALL] $p"
-        brew install $p
-    fi
-done
-
 # install git-remote-gcrypt (not in homebrew)
 grc="$HOME/bin/git-remote-gcrypt"
 if [ ! -r $grc ]; then
