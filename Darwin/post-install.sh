@@ -4,14 +4,6 @@
 
 set -o nounset
 
-# install git-remote-gcrypt (not in homebrew)
-grc="$HOME/bin/git-remote-gcrypt"
-if [ ! -r $grc ]; then
-    echo "[FETCH] git-remote-gcrypt"
-    curl -fsSL "https://raw.github.com/dcreemer/git-remote-gcrypt/master/git-remote-gcrypt" > $grc
-    chmod a+x $grc
-fi
-
 # install gpgtools
 if [ ! -x /usr/local/bin/gpg ]; then
     echo "[INSTALL] GPG Suite"
@@ -38,7 +30,9 @@ if [ ! -d /Applications/Dropbox.app ]; then
 fi
 
 # link 'subl' to sublime text
-SAVEIFS=$IFS
-IFS=$(echo -en "\n\b")
-symlink "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/bin/subl"
-IFS=$SAVEIFS
+if [[ ! -h $HOME/bin/subl ]]; then
+    SAVEIFS=$IFS
+    IFS=$(echo -en "\n\b")
+    ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "$HOME/bin/subl"
+    IFS=$SAVEIFS
+fi
