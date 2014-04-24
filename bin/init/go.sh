@@ -78,7 +78,7 @@ fetch_repo()
     # given a target name, fetch the repository 
     local target=$1
     local target_dir=${DF}/$target
-    if [ ! -r $target ]; then
+    if [ ! -r $target_dir ]; then
         get_repo_url $target
         echo "[CLONE] $REPO -> $target"
         git clone $REPO $target_dir
