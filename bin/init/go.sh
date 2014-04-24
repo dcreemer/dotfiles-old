@@ -81,7 +81,7 @@ fetch_repo()
     if [ ! -r $target ]; then
         get_repo_url $target
         echo "[CLONE] $REPO -> $target"
-        git clone $REPO $target
+        git clone $REPO $target_dir
     fi
 }
 
