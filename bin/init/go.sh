@@ -166,12 +166,14 @@ link_subdir()
     if [[ ! $kind == "dot" ]]; then
         targ_dir="${HOME}/${kind}"
     fi
-    for src_f in $files; do
-        local targ_f=`basename $src_f`
-        if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
-            symlink ${source_dir}/${src_f} ${targ_dir}/${targ_f}
-        fi
-    done
+    if [[ -d ${source_dir} ]]; then
+        for src_f in $files; do
+            local targ_f=`basename $src_f`
+            if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
+                symlink ${source_dir}/${src_f} ${targ_dir}/${targ_f}
+            fi
+        done
+    fi
 }
 
 symlink()
@@ -223,7 +225,7 @@ install_packages()
 {
     local pkgs="${DF}/$1/${OS}/packages"
     if [[ -r $pkgs ]]; then
-        for p in $(cat pkgs) ; do
+        for p in $(cat $pkgs) ; do
             install_package $p
         done
     fi
