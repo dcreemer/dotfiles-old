@@ -10,6 +10,7 @@ set -o errexit
 
 TARGETS=$@
 OS=`uname`
+DF=$HOME/.dotfiles
 
 # list of target -> repository URL; functions as a map
 REPOS=( "base __ git://github.com/dcreemer/dotfiles.git"
@@ -30,53 +31,15 @@ set_targets()
     fi
 }
 
-get_repo()
+bootstrap()
 {
-    # given a target name, fetch the repo URL
-    local k=$1
-    REPO=""
-    for pair in "${REPOS[@]}" ; do
-        if [[ $k == "${pair%% __ *}" ]]; then
-            REPO="${pair##* __ }"
-        fi
-    done
-}
-
-do_install()
-{
-    # run pre-install hook, install files, and then run post-install hook
-    # for the given target
-    local m=$1
-    local df=$HOME/.dotfiles-${m}
-    
-    if [ -d $df ]; then
-        
-        # run pre-install hook
-        if [ -r ${df}/${OS}/pre-install.sh ]; then
-            ${df}/${OS}/pre-install.sh
-        fi
-
-        # install
-        $HOME/.dotfiles-base/bin/link-dotfiles $m
-
-        # run post-install hook
-        if [ -r ${df}/${OS}/post-install.sh ]; then
-            ${df}/${OS}/post-install.sh
-        fi
-        
+    # ensure base and bin dirs
+    if [[ ! -d $DF ]]; then
+        mkdir -p $DF
     fi
-}
-
-bootstrap_homebrew()
-{
-    # install homebrew if needed
-    if [ ! -x /usr/local/bin/brew ]; then
-        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    if [ ! -d $HOME/bin ]; then
+        mkdir $HOME/bin
     fi
-}
-
-bootstrap_git()
-{
     # check to see if git is installed, and if not, install it.
     if [[ ! -x `which git` ]]; then
         echo "[INSTALL] installing git"
@@ -85,7 +48,10 @@ bootstrap_git()
                 sudo apt-get -y install git
                 ;;
             "Darwin")
-                bootstrap_homebrew
+                # install homebrew if needed
+                if [ ! -x /usr/local/bin/brew ]; then
+                    ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+                fi
                 brew install git
                 ;;
             "FreeBSD")
@@ -95,15 +61,48 @@ bootstrap_git()
     fi
 }
 
+get_repo_url()
+{
+    # given a target name, fetch the repo URL
+    local target=$1
+    REPO=""
+    for pair in "${REPOS[@]}" ; do
+        if [[ $target == "${pair%% __ *}" ]]; then
+            REPO="${pair##* __ }"
+        fi
+    done
+}
+
 fetch_repo()
 {
     # given a target name, fetch the repository 
-    local m=$1
-    local target="$HOME/.dotfiles-$m"
+    local target=$1
+    local target_dir=${DF}/$target
     if [ ! -r $target ]; then
-        echo "[CLONE] dotfiles-$m"
-        get_repo $m
+        get_repo_url $m
+        echo "[CLONE] $REPO -> $target"
         git clone $REPO $target
+    fi
+}
+
+do_install()
+{
+    # run pre-install hook, install files, and then run post-install hook
+    # for the given target
+    local target=$1
+    local target_dir=${DF}/${target}
+    local target_os_dir=${DF}/${target}/${OS}
+    if [ -d $target_dir ]; then
+        # run pre-install hook
+        if [ -r ${target_os_dir}/pre-install.sh ]; then
+            ${target_os_dir}/pre-install.sh
+        fi
+        # install
+        $DF/base/bin/link-dotfiles $target
+        # run post-install hook
+        if [ -r ${target_os_dir}/post-install.sh ]; then
+            ${target_os_dir}}/post-install.sh
+        fi
     fi
 }
 

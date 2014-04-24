@@ -6,27 +6,17 @@
 set -o nounset
 set -o errexit
 
-# how are we called?
-case "$1" in
-    base)
-        DF="$HOME/.dotfiles-base"
-        ;;
-    private)
-        DF="$HOME/.dotfiles-private"
-        ;;
-    work)
-        DF="$HOME/.dotfiles-work"
-        ;;
-    *)
-        link-dotfiles base
-        if [ -d $HOME/.dotfiles-private ]; then
-            link-dotfiles private
-        fi
-        if [ -d $HOME/.dotfiles-work ]; then
-            link-dotfiles work
-        fi
-        exit 0
-esac
+TARGETS=$@
+OS=`uname`
+DF=$HOME/.dotfiles
+
+check_targets()
+{
+    # if no target is specified, then re-link all
+    if [[ "$TARGETS" == "" ]]; then
+        TARGETS="$(/bin/ls ${DF})"
+    fi
+}
 
 symlink()
 {
@@ -47,38 +37,26 @@ symlink()
     fi
 }
 
-OS=`uname`
+link_subdir()
+{
+    # called as link_subdir (bin|dot) sourcedir, where sourcedir is like "base/Darwin" or "base"
+    local kind=$1
+    local source_dir=$2
+    local files=$(/bin/ls -a ${DF}/${source_dir}/${kind})
+    for src_f in $files; do
+        local targ_f=`basename $src_f`
+        if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
+            echo "symlink $src_f <- $HOME/${targ_f}"
+        fi
+    done
+}
 
-if [ ! -d $HOME/bin ]; then
-    mkdir $HOME/bin
-fi
-
-# setup generic dot files
-if [ -d ${DF}/dot ]; then
-    for src_f in $(ls -ad ${DF}/dot/.[a-z]*) ; do
-        targ_f=`basename $src_f`
-        symlink $src_f "$HOME/${targ_f}"
+# for every target
+for target in $TARGETS; do
+    # for every kind:
+    for kind in "dot bin"; do
+        # link generic and OS-specific files
+        link_subdir $kind $target
+        link_subdir $kind $target/$OS
     done
-fi
-# setup platform dot files
-if [ -d ${DF}/${OS}/dot ]; then
-    for src_f in $(ls -ad ${DF}/${OS}/dot/.[a-z]*) ; do
-        targ_f=`basename $src_f`
-        symlink $src_f "$HOME/${targ_f}"
-    done
-fi
-
-# setup generic bin files:
-if [ -d ${DF}/bin ]; then
-    for src_f in $(ls -d ${DF}/bin/*) ; do
-        targ_f=`basename $src_f`
-        symlink $src_f "$HOME/bin/$targ_f"
-    done
-fi
-# setup platorm bin files:
-if [ -d ${DF}/${OS}/bin ]; then
-    for src_f in $(ls -d ${DF}/${OS}/bin/*) ; do
-        targ_f=`basename $src_f`
-        symlink $src_f "$HOME/bin/$targ_f"
-    done
-fi
+done
