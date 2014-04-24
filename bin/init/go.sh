@@ -161,12 +161,12 @@ link_subdir()
     # called as link_subdir (bin|dot) sourcedir, where sourcedir is like "base/Darwin" or "base"
     local kind=$1
     local source_dir=${DF}/$2/${kind}
-    local files=$(/bin/ls -a ${source_dir})
     local targ_dir="${HOME}"
     if [[ ! $kind == "dot" ]]; then
         targ_dir="${HOME}/${kind}"
     fi
     if [[ -d ${source_dir} ]]; then
+        local files=$(/bin/ls -a ${source_dir})
         for src_f in $files; do
             local targ_f=`basename $src_f`
             if [[ ! ( $targ_f == "." || $targ_f == ".." ) ]]; then
