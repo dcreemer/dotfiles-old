@@ -13,7 +13,7 @@ if [ ! -r $grc ]; then
 fi
 
 # install packages:
-for p in $(cat $HOME/.dotfiles-base/Linux/packages) ; do
+for p in $(cat $HOME/.dotfiles/base/Linux/packages) ; do
     dpkg -l $p >/dev/null 2>&1
     if [ $? -ne 0 ]; then
         echo "[INSTALL] $p"

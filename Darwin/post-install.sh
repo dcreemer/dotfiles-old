@@ -5,7 +5,7 @@
 set -o nounset
 
 # install brew packages:
-for p in $(cat $HOME/.dotfiles-base/Darwin/packages) ; do
+for p in $(cat $HOME/.dotfiles/base/Darwin/packages) ; do
     if [ ! -d /usr/local/Cellar/${p} ]; then
         echo "[INSTALL] $p"
         brew install $p
