@@ -1,12 +1,3 @@
-\#*
-*.elc
-*~
-/dot/.emacs.d/state
-/dot/.emacs.d/bookmarks
-/dot/.emacs.d/elpa
-/dot/.emacs.d/snippets
-/dot/.emacs.d/tramp
-/dot/.emacs.d/url
-/dot/.lein/indicies
-/dot/.lein/repl-history
-/dot/.lein/repl-port
+/.lein/indicies
+/.lein/repl-history
+/.lein/repl-port

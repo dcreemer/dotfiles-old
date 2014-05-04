@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# -*- bash -*-
+#
+
+install_package "Linux" gnupg
+install_package "Linux" pinentry-curses
+install_package "Linux" gnupg-agent
+install_package "Linux" emacs24-nox
+install_package "Linux" aspell
+install_package "Linux" aspell-en
+
+install_package "FreeBSD" git
+install_package "FreeBSD" bash-completion
+install_package "FreeBSD" aspell
+install_package "FreeBSD" en-aspell
+install_package "FreeBSD" emacs-nox11
+install_package "FreeBSD" go
+install_package "FreeBSD" python27
+
+install_packacge "Darwin" aspell
+install_packacge "Darwin" bash-completion
+install_packacge "Darwin" "emacs --HEAD --cocoa --srgb --use-git-head --with-gnutls"
+install_packacge "Darwin" git
+install_packacge "Darwin" go
+install_packacge "Darwin" leiningen
+install_packacge "Darwin" markdown
+install_packacge "Darwin" osxfuse
+install_packacge "Darwin" pianobar
+install_packacge "Darwin" s3cmd
+install_packacge "Darwin" siege
+install_packacge "Darwin" w3m
+install_packacge "Darwin" wget
