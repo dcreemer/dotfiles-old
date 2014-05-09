@@ -15,6 +15,9 @@ SOURCE="${HOME}/Dropbox/Documents/1Password.agilekeychain"
 # final path component is duplicity subject prefix
 DEST="imaps://${IMAP_USERNAME}@${IMAP_SERVER}/duplicity1p"
 
+# path to binary
+DUPLICITY="/usr/local/bin/duplicity"
+
 # opts:
 OPTS="--imap-mailbox INBOX.backups"
 # allow-source-mismatch is due to my FQDN changing depending on what network I'm on.
@@ -30,16 +33,16 @@ ulimit -n 10240
 
 # backup:
 echo "BACKUP"
-duplicity ${OPTS} ${BACKUP_OPTS} "${SOURCE}" "${DEST}"
+$DUPLICITY ${OPTS} ${BACKUP_OPTS} "${SOURCE}" "${DEST}"
 
 # prune. keep two weeks of full backups + incrs
 echo "PRUNE"
-duplicity ${OPTS} remove-all-but-n-full 2 "${DEST}"
+$DUPLICITY ${OPTS} remove-all-but-n-full 2 "${DEST}"
 
 # verify:
 echo ""
 echo "VERIFY"
-duplicity ${OPTS} verify "${DEST}" "${SOURCE}"
+$DUPLICITY ${OPTS} verify "${DEST}" "${SOURCE}"
 
 # now save a zipped copy in the remote webdav filesystem too:
 echo ""
