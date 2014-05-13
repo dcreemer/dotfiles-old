@@ -2,31 +2,35 @@
 # -*- bash -*-
 #
 
-install_package "Linux" gnupg
-install_package "Linux" pinentry-curses
-install_package "Linux" gnupg-agent
-install_package "Linux" emacs24-nox
-install_package "Linux" aspell
-install_package "Linux" aspell-en
+if [[ "$OS" == "Linux" ]]; then
+    install_package gnupg
+    install_package pinentry-curses
+    install_package gnupg-agent
+    install_package emacs24-nox
+    install_package aspell
+    install_package aspell-en
+fi
 
-install_package "FreeBSD" git
-install_package "FreeBSD" bash-completion
-install_package "FreeBSD" aspell
-install_package "FreeBSD" en-aspell
-install_package "FreeBSD" emacs-nox11
-install_package "FreeBSD" go
-install_package "FreeBSD" python27
+if [[ "$OS" == "FreeBSD" ]]; then
+    install_package bash-completion
+    install_package aspell
+    install_package en-aspell
+    install_package emacs-nox11
+    install_package go
+    install_package python27
+fi
 
-install_package "Darwin" aspell
-install_package "Darwin" bash-completion
-install_package "Darwin" "emacs --HEAD --cocoa --srgb --use-git-head --with-gnutls"
-install_package "Darwin" git
-install_package "Darwin" go
-install_package "Darwin" leiningen
-install_package "Darwin" markdown
-install_package "Darwin" osxfuse
-install_package "Darwin" pianobar
-install_package "Darwin" s3cmd
-install_package "Darwin" siege
-install_package "Darwin" w3m
-install_package "Darwin" wget
+if [[ "$OS" == "Darwin" ]]; then
+    install_package aspell
+    install_package bash-completion
+    install_package "emacs --HEAD --cocoa --srgb --use-git-head --with-gnutls"
+    install_package go
+    install_package leiningen
+    install_package markdown
+    install_package osxfuse
+    install_package pianobar
+    install_package s3cmd
+    install_package siege
+    install_package w3m
+    install_package wget
+fi
