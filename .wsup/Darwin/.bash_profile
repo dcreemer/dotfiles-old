@@ -31,10 +31,10 @@ case "$TERM" in
 esac
 
 alias ls='ls -GF'
+alias t='tree -aCF'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-# default emacs server port location on Mac OS X
 alias ec='emacsclient'
 alias ff='emacsclient -n'
 

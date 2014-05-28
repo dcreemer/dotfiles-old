@@ -3,20 +3,19 @@
 #
 
 if [[ "$OS" == "Linux" ]]; then
-    install_package gnupg
-    install_package pinentry-curses
-    install_package gnupg-agent
-    install_package emacs24-nox
     install_package aspell
     install_package aspell-en
+    install_package emacs24-nox
+    install_package gnupg
+    install_package gnupg-agent
+    install_package pinentry-curses
 fi
 
 if [[ "$OS" == "FreeBSD" ]]; then
-    install_package bash-completion
     install_package aspell
-    install_package en-aspell
+    install_package bash-completion
     install_package emacs-nox11
-    install_package go
+    install_package en-aspell
     install_package python27
 fi
 
@@ -31,6 +30,7 @@ if [[ "$OS" == "Darwin" ]]; then
     install_package pianobar
     install_package s3cmd
     install_package siege
+    install_package tree
     install_package w3m
     install_package wget
 fi
