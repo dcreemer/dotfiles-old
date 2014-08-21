@@ -22,6 +22,7 @@ fi
 if [[ "$OS" == "Darwin" ]]; then
     install_package aspell
     install_package bash-completion
+    install_package cask
     install_package "emacs --HEAD --cocoa --srgb --use-git-head --with-gnutls"
     install_package go
     install_package leiningen
