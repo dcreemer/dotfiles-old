@@ -12,4 +12,5 @@
         :plugins [[lein-pprint "1.1.1"]
                   [lein-ancient "0.5.5"]
                   [lein-localrepo "0.5.3"]
+                  [lein-midje "3.1.3"]
                   [cider/cider-nrepl "0.7.0"]]}}
