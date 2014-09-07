@@ -43,15 +43,12 @@ if [[ "$OS" == "Darwin" ]]; then
     install_package cask android-file-transfer
     install_package cask appcleaner
     install_package cask bittorrent-sync
-    install_package cask charles
     install_package cask crashplan
     install_package cask disk-inventory-x
     install_package cask firefox
     install_package cask flash
     install_package cask google-chrome
-    install_package cask hipchat
     install_package cask java
-    install_package cask keepassx0
     install_package cask kindle
     install_package cask menumeters
     install_package cask omnigraffle
@@ -63,5 +60,4 @@ if [[ "$OS" == "Darwin" ]]; then
     install_package cask transmission
     install_package cask virtualbox
     install_package cask viscosity
-    install_package cask zoomus
 fi
