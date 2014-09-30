@@ -26,8 +26,11 @@ if [[ "$OS" == "Darwin" ]]; then
     install_package brew-cask
     # emacs cask
     install_package cask
+    install_package duplicity
+    install_package encfs
     install_package "emacs --HEAD --cocoa --srgb --use-git-head --with-gnutls"
     install_package go
+    install_package jenv
     install_package leiningen
     install_package markdown
     install_package onepass
@@ -48,6 +51,7 @@ if [[ "$OS" == "Darwin" ]]; then
     install_package cask firefox
     install_package cask flash
     install_package cask google-chrome
+    install_package cask hermes
     install_package cask java
     install_package cask kindle
     install_package cask menumeters

@@ -1,6 +1,6 @@
 ; based on https://gist.github.com/jamesmacaulay/5603176
 ;
-{:user {:dependencies [[org.clojure/tools.namespace "0.2.5"]
+{:user {:dependencies [[org.clojure/tools.namespace "0.2.7"]
                        [clj-time "0.8.0"]
                        [spyscope "0.1.4" :exclusions [clj-time]]
                        [criterium "0.4.3"]]
@@ -9,8 +9,9 @@
                      ; will not load reader literal definitions correctly:
                      (try (require 'spyscope.core)
                           (catch RuntimeException e))]
-        :plugins [[lein-pprint "1.1.1"]
+        :plugins [[lein-pprint "1.1.2"]
                   [lein-ancient "0.5.5"]
+                  [lein-plz "0.3.0" :exclusions [[rewrite-clj] [ancient-clj]]]
                   [lein-localrepo "0.5.3"]
                   [lein-midje "3.1.3"]
                   [cider/cider-nrepl "0.8.0-SNAPSHOT"]]}}
