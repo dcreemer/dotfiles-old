@@ -4,14 +4,12 @@
                        [clj-time "0.8.0"]
                        [spyscope "0.1.4" :exclusions [clj-time]]
                        [criterium "0.4.3"]]
-        :injections [(require '(clojure.tools.namespace repl find))
-                     ; try/catch to workaround an issue where `lein repl` outside a project dir
+        :injections [; try/catch to workaround an issue where `lein repl` outside a project dir
                      ; will not load reader literal definitions correctly:
                      (try (require 'spyscope.core)
                           (catch RuntimeException e))]
-        :plugins [[lein-pprint "1.1.2"]
-                  [lein-ancient "0.5.5"]
-                  [lein-plz "0.3.0" :exclusions [[rewrite-clj] [ancient-clj]]]
+        :plugins [[lein-ancient "0.5.5"]
                   [lein-localrepo "0.5.3"]
                   [lein-midje "3.1.3"]
+                  [lein-kibit "0.0.8"]
                   [cider/cider-nrepl "0.8.0-SNAPSHOT"]]}}
