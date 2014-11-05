@@ -2,7 +2,7 @@
 ;
 {:user {:dependencies [[org.clojure/tools.namespace "0.2.7"]
                        [clj-time "0.8.0"]
-                       [spyscope "0.1.4" :exclusions [clj-time]]
+                       [spyscope "0.1.5" :exclusions [clj-time]]
                        [criterium "0.4.3"]]
         :injections [; try/catch to workaround an issue where `lein repl` outside a project dir
                      ; will not load reader literal definitions correctly:
