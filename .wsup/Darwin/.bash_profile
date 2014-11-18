@@ -38,6 +38,15 @@ alias egrep='egrep --color=auto'
 alias ec='emacsclient'
 alias ff='emacsclient -n'
 
+# gpg
+envfile="$HOME/.gnupg/gpg-agent.env"
+if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
+    eval "$(cat "$envfile")"
+else
+    eval "$(gpg-agent --daemon --write-env-file "$envfile")"
+fi
+export GPG_AGENT_INFO
+
 # virtualenv
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
     export WORKON_HOME=$HOME/.virtualenvs
