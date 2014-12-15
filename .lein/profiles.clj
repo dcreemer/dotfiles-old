@@ -12,4 +12,4 @@
                   [lein-localrepo "0.5.3"]
                   [lein-midje "3.1.3"]
                   [lein-kibit "0.0.8"]
-                  [cider/cider-nrepl "0.8.0-SNAPSHOT"]]}}
+                  [cider/cider-nrepl "0.8.1"]]}}
