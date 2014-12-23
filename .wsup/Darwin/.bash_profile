@@ -75,6 +75,9 @@ if [ -d "${HOME}/.jenv/shims" ]; then
     }
 fi
 
+# speed up lein trampoline
+export LEIN_FAST_TRAMPOLINE=y
+
 # bash completion via homebrew
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
