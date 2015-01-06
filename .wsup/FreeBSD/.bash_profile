@@ -11,6 +11,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/games:/usr/local/sbin:/usr/local/bin:$HO
 case "$TERM" in
     xterm*) color_prompt=yes;;
     eterm-color*) color_prompt=yes;;
+    screen*) color_prompt=yes;;
     *) ;;
 esac
 
