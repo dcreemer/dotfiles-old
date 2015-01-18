@@ -40,7 +40,7 @@ alias ff='emacsclient -n'
 
 # gpg
 envfile="$HOME/.gnupg/gpg-agent.env"
-if [[ -e "$envfile" ]] && kill -0 $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) 2>/dev/null; then
+if [[ -e "$envfile" ]] && [[ $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) == $(pgrep gpg-agent) ]]; then
     eval "$(cat "$envfile")"
 else
     eval "$(gpg-agent --daemon --write-env-file "$envfile")"
