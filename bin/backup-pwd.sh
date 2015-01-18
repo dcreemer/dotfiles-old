@@ -37,31 +37,24 @@ $DUPLICITY ${OPTS} ${BACKUP_OPTS} "${SOURCE}" "${DEST}"
 
 # prune. keep two weeks of full backups + incrs
 echo "PRUNE"
-$DUPLICITY ${OPTS} remove-all-but-n-full 2 "${DEST}"
+$DUPLICITY ${OPTS} --force remove-all-but-n-full 2 "${DEST}"
 
 # verify:
 echo ""
 echo "VERIFY"
 $DUPLICITY ${OPTS} verify "${DEST}" "${SOURCE}"
 
-# now save a zipped copy in the remote webdav filesystem too:
+# now save a compressed copy in the remote webdav filesystem too:
 echo ""
 echo "COPY"
-# mount webdav server if needed:
-if [[ ! -d "/Volumes/${WEBDAV_SERVER}" ]]; then
-    osascript -e " mount volume \"https://${WEBDAV_SERVER}/\" "
-fi
 
-if [[ -r "/Volumes/${WEBDAV_SERVER}/backups" ]]; then
-    cd $(dirname ${SOURCE})
-    # zip, gpg symmetric encrypt, and store:
-    zip -r - $(basename ${SOURCE}) | gpg -c --batch --yes --passphrase "${PASSPHRASE}" -o "/Volumes/${WEBDAV_SERVER}/backups/1pw.zip.gpg"
-    # unmount volume and return to previous dir
-    umount "/Volumes/${WEBDAV_SERVER}"
-    cd -
-else
-    echo "can't mount webdavs backup target"
-fi
+F=`mktemp -t bkup`
+cd  $(dirname ${SOURCE})
+zip -r - $(basename ${SOURCE}) | gpg -c --batch --yes --no-use-agent --passphrase "${PASSPHRASE}" -o "${F}"
+cd -
+echo "UPLOAD"
+curl -T "${F}" ftp://${WEBDAV_SERVER}/backups/1pw.zip.gpg -u "${IMAP_USERNAME}:${IMAP_PASSWORD}"
+rm -f ${F}
 
 # remove secrets
 unset IMAP_PASSWORD
