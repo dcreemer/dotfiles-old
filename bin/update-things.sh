@@ -3,9 +3,8 @@
 # update local installs
 #
 
-echo -n "lein profile... "
-lein ancient upgrade-profiles
+# echo -n "lein profile... "
+# lein ancient upgrade-profiles
 
 echo -n "homebrew... "
-brew update
-brew outdated
+brew update && brew outdated
