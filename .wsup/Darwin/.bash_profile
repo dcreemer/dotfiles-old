@@ -33,8 +33,6 @@ esac
 alias ls='ls -GF'
 alias t='tree -aCF'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
 alias ec='emacsclient'
 alias ff='emacsclient -n'
 
@@ -46,6 +44,16 @@ else
     eval "$(gpg-agent --daemon --write-env-file "$envfile")"
 fi
 export GPG_AGENT_INFO
+
+# pyenv
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+fi
+
+# rbenv
+if which rbenv > /dev/null; then
+    eval "$(rbenv init -)";
+fi
 
 # virtualenv
 if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
@@ -74,6 +82,9 @@ if [ -d "${HOME}/.jenv/shims" ]; then
       esac
     }
 fi
+
+# GNU global
+GNU_GLOBAL_VERS=`brew info --json=v1 global | jq -r '.[0].installed[0].version'`
 
 # speed up lein trampoline
 export LEIN_FAST_TRAMPOLINE=y

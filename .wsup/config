@@ -25,30 +25,31 @@ if [[ "$OS" == "Darwin" ]]; then
     install_package brew-cask
     install_package duplicity
     install_package encfs
-    install_package "emacs --cocoa --srgb --with-gnutls"
+    install_package "emacs --with-cocoa --with-gnutls"
     install_package go
     install_package gnupg
     install_package gpg-agent
     install_package jenv
+    install_package jq
     install_package leiningen
     install_package markdown
-    install_package pinentry-mac
     install_package onepass
+    install_package pinentry-mac
     install_package s3cmd
     install_package siege
+    install_package the_silver_searcher
     install_package tidyp
     install_package tree
     install_package w3m
     install_package wget
-    install_package cask adium
     install_package cask android-file-transfer
     install_package cask appcleaner
-    install_package cask bittorrent-sync
     install_package cask crashplan
+    install_package cask dropbox
     install_package cask firefox
     install_package cask google-chrome
+    install_package cask hermes
     install_package cask java
-    install_package cask menumeters
     install_package cask omnigraffle
     install_package cask omnioutliner-professional3
     install_package cask osxfuse
