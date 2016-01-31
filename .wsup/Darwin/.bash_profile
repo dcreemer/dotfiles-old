@@ -31,7 +31,8 @@ case "$TERM" in
 esac
 
 alias ls='ls -GF'
-alias t='tree -aCF'
+alias l='tree -aCF'
+alias t='todo.sh'
 alias grep='grep --color=auto'
 alias ec='emacsclient'
 alias ff='emacsclient -n'
@@ -48,11 +49,6 @@ export GPG_AGENT_INFO
 # pyenv
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
-fi
-
-# rbenv
-if which rbenv > /dev/null; then
-    eval "$(rbenv init -)";
 fi
 
 # virtualenv
