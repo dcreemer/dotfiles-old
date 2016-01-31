@@ -50,7 +50,7 @@ echo "COPY"
 
 F=`mktemp -t bkup`
 cd  $(dirname ${SOURCE})
-zip -r - $(basename ${SOURCE}) | gpg -c --batch --yes --no-use-agent --passphrase "${PASSPHRASE}" -o "${F}"
+zip -q -r - $(basename ${SOURCE}) | gpg -c --batch --yes --no-use-agent --passphrase "${PASSPHRASE}" -o "${F}"
 cd -
 echo "UPLOAD"
 curl -T "${F}" ftp://${WEBDAV_SERVER}/backups/1pw.zip.gpg -u "${IMAP_USERNAME}:${IMAP_PASSWORD}"
