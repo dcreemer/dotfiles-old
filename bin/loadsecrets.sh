@@ -7,7 +7,7 @@
 #
 
 SECRETS="${HOME}/.wsup/private/.wsup/misc/secrets.sh.gpg"
-x=$(gpg -d ${SECRETS} 2>/dev/null | grep =)
+x=$(gpg2 -d ${SECRETS} 2>/dev/null | grep =)
 
 while IFS='|' read -ra ADDR; do
     for i in "${ADDR[@]}"; do

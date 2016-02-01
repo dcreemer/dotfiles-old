@@ -1,16 +1,17 @@
-# -*- shell-script -*-
 #
-# dcreemer mac os x .bash_profile
+# .bashrc for dcreemer
+# should work on FreeBSD, Mac OS X, and Linux
 #
 
 # If not running interactively, don't do anything
-[ -z "$PS1" ] && return
-
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin
+if [[ $- != *i* ]]; then
+    return
+fi
 
 case "$TERM" in
     xterm*) color_prompt=yes;;
     eterm-color*) color_prompt=yes;;
+    screen*) color_prompt=yes;;
     *) ;;
 esac
 
@@ -30,21 +31,21 @@ case "$TERM" in
       ;;
 esac
 
+# aliases:
 alias ls='ls -GF'
-alias l='tree -aCF'
-alias t='todo.sh'
 alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 alias ec='emacsclient'
 alias ff='emacsclient -n'
 
-# gpg
-envfile="$HOME/.gnupg/gpg-agent.env"
-if [[ -e "$envfile" ]] && [[ $(grep GPG_AGENT_INFO "$envfile" | cut -d: -f 2) == $(pgrep gpg-agent) ]]; then
-    eval "$(cat "$envfile")"
-else
-    eval "$(gpg-agent --daemon --write-env-file "$envfile")"
-fi
-export GPG_AGENT_INFO
+# history:
+export HISTTIMEFORMAT="[%Y-%m-%d %T] "
+export HISTSIZE=1000
+shopt -s histappend
+
+# shell editor
+export EDITOR="vi"
 
 # pyenv
 if which pyenv > /dev/null; then
@@ -79,15 +80,33 @@ if [ -d "${HOME}/.jenv/shims" ]; then
     }
 fi
 
-# GNU global
-GNU_GLOBAL_VERS=`brew info --json=v1 global | jq -r '.[0].installed[0].version'`
+# GPG
+export GPG_TTY=$(tty)
 
-# speed up lein trampoline
-export LEIN_FAST_TRAMPOLINE=y
+# Mac OS X specific
+if [[ "$OS" == "Darwin" ]]; then 
+  # bash completion via homebrew
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+  fi
+fi
 
-# bash completion via homebrew
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+if [[ "$OS" == "FreeBSD" ]]; then
+  # load bash completion
+  if [[ $PS1 && -f /usr/local/share/bash-completion/bash_completion ]]; then
+    . /usr/local/share/bash-completion/bash_completion
+    # fixup todo.sh completion
+    _todoElsewhere()
+    {
+        local _todo_sh='/usr/local/bin/todo'
+        _todo "$@"
+    }
+    complete -F _todoElsewhere todo
+  fi
+fi
+
+if [[ "$OS" == "Linux" ]]; then
+  a=2
 fi
 
 # private settings
@@ -95,7 +114,10 @@ if [ -f $HOME/.bash_private ]; then
     source $HOME/.bash_private
 fi
 
-# work specific settings
+# work settings
 if [ -f $HOME/.bash_work ]; then
     source $HOME/.bash_work
 fi
+
+# done
+
