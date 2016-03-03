@@ -4,7 +4,7 @@
                        [org.clojure/tools.nrepl "0.2.12"]
                        [clj-time "0.11.0"]
                        [spyscope "0.1.5" :exclusions [clj-time]]
-                       [criterium "0.4.3"]]
+                       [criterium "0.4.4"]]
         :injections [; try/catch to workaround an issue where `lein repl` outside a project dir
                      ; will not load reader literal definitions correctly:
                      (try (require 'spyscope.core)
@@ -13,4 +13,4 @@
                   [lein-localrepo "0.5.3"]
                   [lein-midje "3.2"]
                   [lein-kibit "0.1.2"]
-                  [cider/cider-nrepl "0.10.2"]]}}
+                  [cider/cider-nrepl "0.11.0"]]}}
