@@ -9,8 +9,7 @@
                      ; will not load reader literal definitions correctly:
                      (try (require 'spyscope.core)
                           (catch RuntimeException e))]
-        :plugins [[lein-ancient "0.6.8"]
+        :plugins [[lein-ancient "0.6.10"]
                   [lein-localrepo "0.5.3"]
                   [lein-midje "3.2"]
-                  [lein-kibit "0.1.2"]
-                  [cider/cider-nrepl "0.11.0"]]}}
+                  [lein-kibit "0.1.2"]]}}
