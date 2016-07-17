@@ -94,33 +94,9 @@ if [[ "$OS" == "Darwin" ]]; then
   export HOMEBREW_NO_ANALYTICS=1
 fi
 
-if [[ "$OS" == "FreeBSD" ]]; then
-  # load bash completion
-  if [[ $PS1 && -f /usr/local/share/bash-completion/bash_completion ]]; then
-    . /usr/local/share/bash-completion/bash_completion
-    # fixup todo.sh completion
-    _todoElsewhere()
-    {
-        local _todo_sh='/usr/local/bin/todo'
-        _todo "$@"
-    }
-    complete -F _todoElsewhere todo
-  fi
-fi
-
-if [[ "$OS" == "Linux" ]]; then
-  a=2
-fi
-
-# private settings
-if [ -f $HOME/.bash_private ]; then
-    source $HOME/.bash_private
-fi
-
-# work settings
-if [ -f $HOME/.bash_work ]; then
-    source $HOME/.bash_work
-fi
+# load other bash configuration
+for f in ${HOME}/.bash.d/*; do
+   source "$f"
+done
 
 # done
-
