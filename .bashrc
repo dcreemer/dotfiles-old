@@ -58,28 +58,6 @@ if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
     source "/usr/local/bin/virtualenvwrapper.sh"
 fi
 
-# jenv
-if [ -d "${HOME}/.jenv/shims" ]; then
-    export PATH="${HOME}/.jenv/shims:${PATH}"
-    jenv rehash 2>/dev/null
-    export JENV_LOADED=1
-    unset JAVA_HOME
-    jenv() {
-      typeset command
-      command="$1"
-      if [ "$#" -gt 0 ]; then
-          shift
-      fi
-
-      case "$command" in
-          enable-plugin|rehash|shell|shell-options)
-            eval `jenv "sh-$command" "$@"`;;
-          *)
-            command jenv "$command" "$@";;
-      esac
-    }
-fi
-
 # GPG
 export GPG_TTY=$(tty)
 
