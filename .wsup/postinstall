@@ -4,8 +4,81 @@
 
 set -o nounset
 
-OS=`uname -s`
+# programs to install:
+
+if [[ "$OS" == "Linux" ]]; then
+    case "$DIST" in
+        "Alpine Linux")
+            sudo apk update
+            sudo apk add \
+                 gnupg \
+                 pinentry \
+                 htop \
+                 tmux \
+                 wget
+            ;;
+        "Ubuntu")
+            sudo apt-get up
+            sudo apt-get install -y \
+                 aspell \
+                 aspell-en \
+                 emacs24-nox
+            ;;
+    esac
+fi
+
+if [[ "$OS" == "FreeBSD" ]]; then
+    sudo pkg update
+    sudo pkg install -U -y \
+         aspell \
+         bash-completion \
+         emacs-nox11 \
+         en-aspell \
+         python27
+fi
 
 if [[ "$OS" == "Darwin" ]]; then
-    echo "nothing to do!"
+    brew update
+    brew install \
+         gnupg21 \
+         pinentry \
+         pinentry-mac \
+         pass
+    brew install \
+         aspell \
+         bash-completion \
+         diff-so-fancy \
+         fzf \
+         go \
+         htop \
+         jq \
+         leiningen \
+         markdown \
+         planck \
+         pyenv \
+         siege \
+         syncthing \
+         syncthing-inotify \
+         the_silver_searcher \
+         tidyp \
+         todo-txt \
+         tree \
+         w3m \
+         wget
+    brew install emacs --devel --with-gnutls --with-imagemagick --with-cocoa
+    brew cask install \
+         android-file-transfer \
+         appcleaner \
+         crashplan \
+         dropbox \
+         firefox \
+         google-chrome \
+         java \
+         omnigraffle \
+         skype \
+         sublime-text \
+         transmission \
+         virtualbox \
+         virtualbox-extension-pack \
+         viscosity
 fi
