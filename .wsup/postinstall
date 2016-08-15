@@ -14,6 +14,7 @@ if [[ "$OS" == "Linux" ]]; then
                  gnupg \
                  pinentry \
                  htop \
+                 less \
                  tmux \
                  wget
             ;;
