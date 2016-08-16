@@ -11,10 +11,14 @@ if [[ "$OS" == "Linux" ]]; then
         "Alpine Linux")
             sudo apk update
             sudo apk add \
+                 bash-doc \
+                 bash-completion \
                  gnupg \
                  pinentry \
                  htop \
                  less \
+                 man \
+                 man-pages \
                  tmux \
                  wget
             ;;
