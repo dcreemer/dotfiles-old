@@ -32,9 +32,11 @@ case "$TERM" in
 esac
 
 # aliases:
-if [[ "$DIST" != "Alpine Linux" ]]; then
-    # Alpine uses busybox for grep and ls, not needed
+if [ "$OS" == "Darwin" ]; then
     alias ls='ls -GF'
+elif [ "$DIST" != "Alpine Linux" ]; then
+    # Alpine uses busybox for grep and ls, not needed
+    alias ls='ls --color -F'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
