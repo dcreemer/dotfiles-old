@@ -55,6 +55,9 @@ export EDITOR="vi"
 # pyenv
 if which pyenv > /dev/null; then
     eval "$(pyenv init -)"
+    if which pyenv-virtualenv-init > /dev/null; then
+        eval "$(pyenv virtualenv-init -)"
+    fi
 fi
 
 # virtualenv
