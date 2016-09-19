@@ -61,6 +61,7 @@ if [[ "$OS" == "Darwin" ]]; then
          markdown \
          planck \
          pyenv \
+         pyenv-virtualenv \
          siege \
          syncthing \
          syncthing-inotify \
@@ -70,7 +71,7 @@ if [[ "$OS" == "Darwin" ]]; then
          tree \
          w3m \
          wget
-    brew install emacs --devel --with-gnutls --with-imagemagick --with-cocoa
+    brew install emacs --with-gnutls --with-imagemagick --with-cocoa --without-librsvg
     brew cask install \
          android-file-transfer \
          appcleaner \
@@ -81,6 +82,7 @@ if [[ "$OS" == "Darwin" ]]; then
          java \
          omnigraffle \
          skype \
+         stay \
          sublime-text \
          transmission \
          virtualbox \
