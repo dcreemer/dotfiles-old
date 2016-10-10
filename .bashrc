@@ -32,15 +32,16 @@ case "$TERM" in
 esac
 
 # aliases:
-if [ "$OS" == "Darwin" ]; then
+if [ "$OS" == "Darwin" ] || [ "$OS" == "FreeBSD" ]; then
     alias ls='ls -GF'
-elif [ "$DIST" != "Alpine Linux" ]; then
-    # Alpine uses busybox for grep and ls, not needed
+elif [ "$OS" == "Linux"] && [ "$USING_BUSYBOX" != "yes"]; then
+    # on busybox systems (e.g. Alpine Linux) these are not needed
     alias ls='ls --color -F'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+
 alias ec='emacsclient'
 alias ff='emacsclient -n'
 
@@ -70,7 +71,7 @@ fi
 export GPG_TTY=$(tty)
 
 # Mac OS X specific
-if [[ "$OS" == "Darwin" ]]; then 
+if [ "$OS" == "Darwin" ]; then
   # bash completion via homebrew
   if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
