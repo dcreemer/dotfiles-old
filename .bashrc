@@ -32,15 +32,27 @@ case "$TERM" in
 esac
 
 # aliases:
-if [ "$OS" == "Darwin" ] || [ "$OS" == "FreeBSD" ]; then
-    alias ls='ls -GF'
-elif [ "$OS" == "Linux" ] && [ "$USING_BUSYBOX" != "yes" ]; then
-    # on busybox systems (e.g. Alpine Linux) these are not needed
-    alias ls='ls --color -F'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
+case "$OS" in
+    "Darwin")
+        alias ls='ls -GF'
+        ;;
+    "FreeBSD")
+        alias ls='ls -GF'
+        ;;
+    "Linux")
+        case "$DIST" in
+            "Alpine*")
+                alias ls='ls -F'
+                ;;
+            "*")
+                alias ls='ls --color -F'
+                alias grep='grep --color=auto'
+                alias fgrep='fgrep --color=auto'
+                alias egrep='egrep --color=auto'
+                ;;
+        esac
+        ;;
+esac
 
 alias ec='emacsclient'
 alias ff='emacsclient -n'

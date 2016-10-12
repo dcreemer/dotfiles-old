@@ -10,10 +10,6 @@ else
     export DIST="NA"
 fi
 
-if [ -L /bin/ls ] && [ "/bin/busybox" == "$(readlink /bin/ls)" ]; then
-    export USING_BUSYBOX="yes"
-fi
-
 export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 if [ "$BASH" ] && [ -f ~/.bashrc ]; then
