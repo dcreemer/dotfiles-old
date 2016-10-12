@@ -33,18 +33,18 @@ esac
 
 # aliases:
 case "$OS" in
-    "Darwin")
+    Darwin)
         alias ls='ls -GF'
         ;;
-    "FreeBSD")
+    FreeBSD)
         alias ls='ls -GF'
         ;;
-    "Linux")
+    Linux)
         case "$DIST" in
-            "Alpine*")
+            Alpine*)
                 alias ls='ls -F'
                 ;;
-            "*")
+            *)
                 alias ls='ls --color -F'
                 alias grep='grep --color=auto'
                 alias fgrep='fgrep --color=auto'
