@@ -34,7 +34,7 @@ esac
 # aliases:
 if [ "$OS" == "Darwin" ] || [ "$OS" == "FreeBSD" ]; then
     alias ls='ls -GF'
-elif [ "$OS" == "Linux"] && [ "$USING_BUSYBOX" != "yes"]; then
+elif [ "$OS" == "Linux" ] && [ "$USING_BUSYBOX" != "yes" ]; then
     # on busybox systems (e.g. Alpine Linux) these are not needed
     alias ls='ls --color -F'
     alias grep='grep --color=auto'
