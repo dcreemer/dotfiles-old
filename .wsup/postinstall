@@ -59,7 +59,6 @@ if [[ "$OS" == "Darwin" ]]; then
          jq \
          leiningen \
          markdown \
-         planck \
          pyenv \
          pyenv-virtualenv \
          siege \
