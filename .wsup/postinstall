@@ -66,11 +66,10 @@ if [[ "$OS" == "Darwin" ]]; then
          syncthing-inotify \
          the_silver_searcher \
          tidy-html5 \
-         todo-txt \
          tree \
          w3m \
          wget
-    brew install emacs --with-gnutls --with-imagemagick --with-cocoa --with-modules
+    brew install emacs-mac --with-modern-icon --with-modules --with-xml2 --with-gnutls
     brew cask install \
          android-file-transfer \
          appcleaner \
