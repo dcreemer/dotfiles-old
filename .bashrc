@@ -96,8 +96,6 @@ if [ "$OS" == "Darwin" ]; then
   # Turn off analytics
   # https://github.com/Homebrew/brew/blob/master/share/doc/homebrew/Analytics.md
   export HOMEBREW_NO_ANALYTICS=1
-  # gnupg 2.1
-  export PATH="/usr/local/opt/gnupg@2.1/bin:$PATH"
 fi
 
 # load other bash configuration
