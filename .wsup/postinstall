@@ -45,46 +45,31 @@ fi
 if [[ "$OS" == "Darwin" ]]; then
     brew update
     brew install \
-         gnupg21 \
-         pinentry \
-         pinentry-mac \
-         pass
-    brew install \
          aspell \
+         bash \
          bash-completion \
-         diff-so-fancy \
+         flake8 \
          fzf \
+         glib \
+         gnups \
          go \
          htop \
+         isync \
          jq \
          leiningen \
+         libxml2 \
          markdown \
+         pinentry \
+         pinentry-mac \
          pyenv \
          pyenv-virtualenv \
          pyenv-virtualenvwrapper \
-         siege \
          syncthing \
          syncthing-inotify \
          the_silver_searcher \
-         tidy-html5 \
+         tmux \
          tree \
          w3m \
          wget
-    brew install emacs-mac --with-modern-icon --with-modules --with-xml2 --with-gnutls
-    brew cask install \
-         android-file-transfer \
-         appcleaner \
-         crashplan \
-         dropbox \
-         firefox \
-         google-chrome \
-         java \
-         omnigraffle \
-         skype \
-         stay \
-         sublime-text \
-         transmission \
-         virtualbox \
-         virtualbox-extension-pack \
-         viscosity
+    brew install railwaycat/emacsmacport/emacs-mac --with-modern-icon --with-modules --with-xml2 --with-gnutls --with-glib
 fi
