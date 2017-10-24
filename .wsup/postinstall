@@ -61,6 +61,7 @@ if [[ "$OS" == "Darwin" ]]; then
          markdown \
          pyenv \
          pyenv-virtualenv \
+         pyenv-virtualenvwrapper \
          siege \
          syncthing \
          syncthing-inotify \

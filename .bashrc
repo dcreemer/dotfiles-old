@@ -71,17 +71,15 @@ shopt -s histappend
 export EDITOR="vi"
 
 # pyenv
-if which pyenv > /dev/null; then
+if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init -)"
-    if which pyenv-virtualenv-init > /dev/null; then
+    if command -v pyenv-virtualenv-init >/dev/null 2>&1; then
         eval "$(pyenv virtualenv-init -)"
     fi
-fi
-
-# virtualenv
-if [ -f "/usr/local/bin/virtualenvwrapper.sh" ]; then
-    export WORKON_HOME=$HOME/.virtualenvs
-    source "/usr/local/bin/virtualenvwrapper.sh"
+    if command -v pyenv-virtualenvwrapper >/dev/null 2>&1; then
+        export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+        pyenv virtualenvwrapper
+    fi
 fi
 
 # GPG
