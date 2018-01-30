@@ -48,16 +48,14 @@ if [[ "$OS" == "Darwin" ]]; then
          aspell \
          bash \
          bash-completion \
+         clojure \
          flake8 \
          fzf \
-         glib \
-         gnups \
+         gnupg \
          go \
-         htop \
-         isync \
+         hugo \
          jq \
          leiningen \
-         libxml2 \
          markdown \
          pinentry \
          pinentry-mac \
@@ -71,5 +69,14 @@ if [[ "$OS" == "Darwin" ]]; then
          tree \
          w3m \
          wget
-    brew install railwaycat/emacsmacport/emacs-mac --with-modern-icon --with-modules --with-xml2 --with-gnutls --with-glib
+    brew cask install \
+         appcleaner \
+         calibre \
+         emacs-mac \
+         hermes \
+         simplenote \
+         stay \
+         sublime-text \
+         visual-studio-code \
+         vlc
 fi
