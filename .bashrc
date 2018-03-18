@@ -70,16 +70,9 @@ shopt -s histappend
 # shell editor
 export EDITOR="vi"
 
-# pyenv
-if command -v pyenv >/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-    if command -v pyenv-virtualenv-init >/dev/null 2>&1; then
-        eval "$(pyenv virtualenv-init -)"
-    fi
-    if command -v pyenv-virtualenvwrapper >/dev/null 2>&1; then
-        export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-        pyenv virtualenvwrapper
-    fi
+# python
+if command -v pipenv >/dev/null 2>&1; then
+    eval "$(pipenv --completion)"
 fi
 
 # GPG

@@ -10,7 +10,7 @@ else
     export DIST="NA"
 fi
 
-export PATH=$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 if [ "$ANDROID_ROOT" != "" ]; then
     # inside termux, need busybox

@@ -39,7 +39,9 @@ if [[ "$OS" == "FreeBSD" ]]; then
          bash-completion \
          emacs-nox11 \
          en-aspell \
-         python27
+         python27 \
+         py27-pip \
+         py36-pip
 fi
 
 if [[ "$OS" == "Darwin" ]]; then
@@ -59,9 +61,9 @@ if [[ "$OS" == "Darwin" ]]; then
          markdown \
          pinentry \
          pinentry-mac \
-         pyenv \
-         pyenv-virtualenv \
-         pyenv-virtualenvwrapper \
+         python \
+         python@2 \
+         pipenv \
          syncthing \
          syncthing-inotify \
          the_silver_searcher \
