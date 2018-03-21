@@ -14,10 +14,20 @@ if [ -e /run/crouton-ext/socket ]; then
 fi
 
 case "$TERM" in
-    xterm*) color_prompt=yes;;
-    eterm-color*) color_prompt=yes;;
-    screen*) color_prompt=yes;;
-    *) ;;
+    xterm*|rxvt*)
+        color_prompt=yes
+        set_title=yes
+        ;;
+    eterm-color*)
+        color_prompt=yes
+        # emacs Term mode behaves much like xterm
+        export TERM=xterm
+        ;;
+    screen*)
+        color_prompt=yes
+        ;;
+    *)
+        ;;
 esac
 
 if [ "$color_prompt" = yes ]; then
@@ -28,13 +38,10 @@ fi
 unset color_prompt
 
 # when in a terminal window, change the title bar:
-case "$TERM" in
-    xterm*|rxvt*)
-      PS1="\[\e]0;\u@\h: \w\a\]$PS1"
-      ;;
-    *)
-      ;;
-esac
+if [ "$set_title" = "yes" ]; then
+    PS1="\[\e]0;\u@\h: \w\a\]$PS1"
+fi
+unset set_title
 
 # aliases:
 case "$OS" in
