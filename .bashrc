@@ -77,11 +77,6 @@ shopt -s histappend
 # shell editor
 export EDITOR="vi"
 
-# python
-if command -v pipenv >/dev/null 2>&1; then
-    eval "$(pipenv --completion)"
-fi
-
 # GPG
 export GPG_TTY=$(tty)
 
@@ -100,5 +95,8 @@ fi
 for f in ${HOME}/.bash.d/*; do
    source "$f"
 done
+
+# direnv fixes everything! https://direnv.net
+eval "$(direnv hook bash)"
 
 # done

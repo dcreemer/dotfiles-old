@@ -1,9 +1,18 @@
 # global git ignore file
-*.elc
-*.pyc
+
+# editor and filesystem crufy
 *~
 .DS_Store
-.java-version
+
+# compiled output
+*.elc
+*.pyc
+
+# Tags
 GTAGS
 GRTAGS
 GPATH
+
+# direnv control and env files
+.direnv
+.envrc

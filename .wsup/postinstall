@@ -37,6 +37,7 @@ if [[ "$OS" == "FreeBSD" ]]; then
     sudo pkg install -U -y \
          aspell \
          bash-completion \
+         direnv \
          emacs-nox11 \
          en-aspell \
          python27 \
@@ -51,6 +52,7 @@ if [[ "$OS" == "Darwin" ]]; then
          bash \
          bash-completion \
          clojure \
+         direnv \
          flake8 \
          fzf \
          gnupg \
