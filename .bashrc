@@ -8,11 +8,6 @@ if [[ $- != *i* ]]; then
     return
 fi
 
-# in crouton?
-if [ -e /run/crouton-ext/socket ]; then
-    export TERM=xterm-256color
-fi
-
 case "$TERM" in
     xterm*|rxvt*)
         color_prompt=yes
