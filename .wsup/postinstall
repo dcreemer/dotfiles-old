@@ -38,7 +38,7 @@ if [[ "$OS" == "FreeBSD" ]]; then
          aspell \
          bash-completion \
          direnv \
-         emacs-nox11 \
+         emacs-nox \
          en-aspell \
          python27 \
          py27-pip \
