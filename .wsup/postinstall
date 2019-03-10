@@ -40,9 +40,16 @@ if [[ "$OS" == "FreeBSD" ]]; then
          direnv \
          emacs-nox \
          en-aspell \
+         fzf \
+         gnupg \
+         jq \
+         pinentry \
+         pinentry-curses \
          python27 \
          py27-pip \
-         py36-pip
+         py36-pip \
+         tmux \
+         wget
 fi
 
 if [[ "$OS" == "Darwin" ]]; then
@@ -51,6 +58,7 @@ if [[ "$OS" == "Darwin" ]]; then
          aspell \
          bash \
          bash-completion \
+         cargo-completion \
          clojure \
          direnv \
          flake8 \
@@ -61,26 +69,29 @@ if [[ "$OS" == "Darwin" ]]; then
          jq \
          leiningen \
          markdown \
+         mas \
          pinentry \
          pinentry-mac \
          python \
          python@2 \
          pipenv \
+         ripgrep \
+         rustup-init \
          syncthing \
-         syncthing-inotify \
-         the_silver_searcher \
          tmux \
          tree \
          w3m \
          wget
     brew cask install \
+         1password-cli \
          appcleaner \
+         arq \
          calibre \
          emacs-mac \
          hermes \
+         horndis \
          simplenote \
          stay \
          sublime-text \
-         visual-studio-code \
          vlc
 fi
