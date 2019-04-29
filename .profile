@@ -10,13 +10,15 @@ else
     export DIST="NA"
 fi
 
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-
 export LANG=en_US.UTF-8
 
 if [ "$ANDROID_ROOT" != "" ]; then
-    # inside termux, need busybox
-    export PATH=$PATH:/usr/bin/applets
+    # inside termux, need busybox and user
+    export PATH=$HOME/bin:$HOME/.local/bin:$PREFIX/bin:$PREFIX/bin/applets
+    export USER=$(whoami)
+    eval `ssh-agent -s`
+else
+    export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 fi
 
 if [ "$BASH" ] && [ -f ~/.bashrc ]; then
