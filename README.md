@@ -10,6 +10,6 @@ sets up a consistent environment general CLI usage and development.
 
 Some features:
 
-- Sets a few extra environment variables, suck as `OS` and `DIST`
+- Sets a few extra environment variables, such as `OS` and `DIST`
 - Ensures the `ssh-agent` is properly running and terminated as appropriate
 - Sets a reasonable prompt
