@@ -21,9 +21,12 @@ else
     export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 fi
 
-# on termux or non-X FreeBSD, need ssh-agent
-if [ "$ANDROID_ROOT" != "" ] || ( [ "$OS" == "FreeBSD" ] && [ "$DISPLAY" == "" ] ); then
-    eval `ssh-agent -s`
+# do not start SSH agent inside tmux
+if [ "$TMUX" == "" ]; then
+    # on termux or non-X FreeBSD, need ssh-agent
+    if [ "$ANDROID_ROOT" != "" ] || ( [ "$OS" == "FreeBSD" ] && [ "$DISPLAY" == "" ] ); then
+        eval `ssh-agent -s`
+    fi
 fi
 
 if [ "$BASH" ] && [ -f ~/.bashrc ]; then
