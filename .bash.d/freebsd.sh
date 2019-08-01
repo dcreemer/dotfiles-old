@@ -4,6 +4,11 @@
 
 if [ "$OS" == "FreeBSD" ]; then
 
+   # start ssh-agent on non-X shells
+    if [ "$DISPLAY" == "" ]; then
+       start_ssh_agent
+    fi
+
     # cleanup agents on exit
     trap "{ pkill ssh-agent; pkill gpg-agent; logout; }" EXIT
 
