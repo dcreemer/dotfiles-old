@@ -1,3 +1,4 @@
+# shellcheck disable=SC2039
 #
 # Termux (Android) specific
 #
