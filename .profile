@@ -15,12 +15,13 @@ if [ "$OS" == "Linux" ]; then
     fi
 fi
 
-export LANG=en_US.UTF-8
+export LANG="en_US.UTF-8"
 
 # set the PATH
 if [ "$DIST" == "termux" ]; then
     # inside termux, need busybox and user
-    export PATH=$HOME/bin:$HOME/.local/bin:$PREFIX/bin:$PREFIX/bin/applets[<8;120;23m]
+    export PATH=$HOME/bin:$HOME/.local/bin:$PREFIX/bin:$PREFIX/bin/applets
+    export USER=$(whoami)
 elif [ "$DIST" == "wsl" ]; then
     # inside WSL, need some Windows paths
     export WINHOME="/mnt/c/Users/D Creemer"
