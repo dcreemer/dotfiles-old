@@ -24,11 +24,10 @@ if [ "$DIST" == "termux" ]; then
     export USER=$(whoami)
 elif [ "$DIST" == "wsl" ]; then
     # inside WSL, need some Windows paths
-    export WINHOME="/mnt/c/Users/D Creemer"
+    export WINHOME="/mnt/c/Users/david"
     PATH=$HOME/bin:$HOME/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
     PATH=$PATH:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem
     PATH=$PATH:"$WINHOME/AppData/Local/Microsoft/WindowsApps"
-    PATH=$PATH:"$WINHOME/AppData/Local/Keybase"
     PATH=$PATH:"$WINHOME/AppData/Local/Programs/Microsoft VS Code/bin"
     export PATH
 else

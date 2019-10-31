@@ -3,7 +3,7 @@
 # WSL specific
 #
 
-if [ "$DIST" == "WSL" ]; then
+if [ "$DIST" == "wsl" ]; then
 
     # start ssh-agent if needed
     start_ssh_agent
