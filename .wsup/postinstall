@@ -58,7 +58,6 @@ if [[ "$OS" == "Darwin" ]]; then
          aspell \
          bash \
          bash-completion \
-         cargo-completion \
          clojure \
          direnv \
          flake8 \
@@ -70,14 +69,10 @@ if [[ "$OS" == "Darwin" ]]; then
          leiningen \
          markdown \
          mas \
-         pinentry \
          pinentry-mac \
-         python \
-         python@2 \
-         pipenv \
+         pyenv \
          ripgrep \
          rustup-init \
-         syncthing \
          tmux \
          tree \
          w3m \
@@ -87,7 +82,7 @@ if [[ "$OS" == "Darwin" ]]; then
          appcleaner \
          arq \
          calibre \
-         emacs-mac \
+         emacs \
          hermes \
          horndis \
          simplenote \
