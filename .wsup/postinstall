@@ -60,7 +60,6 @@ if [[ "$OS" == "Darwin" ]]; then
          bash-completion \
          clojure \
          direnv \
-         flake8 \
          fzf \
          gnupg \
          go \
