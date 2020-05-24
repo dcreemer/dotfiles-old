@@ -43,7 +43,7 @@ function tweetbot(url)
 	else
 		hs.urlevent.openURLWithBundle(url, DefaultBrowser)
 	end
-	hs.urlevent.openURL(url)
+	hs.urlevent.openURLWithBundle(url, "com.tapbots.Tweetbot3Mac")
 end
 
 chromeDefault = hs.fnutils.partial(chromeWithProfile, "Default")
