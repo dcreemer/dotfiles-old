@@ -83,4 +83,7 @@ done
 # direnv fixes everything! https://direnv.net
 eval "$(direnv hook bash)"
 
+# FZF completion
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # done
