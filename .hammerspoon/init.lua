@@ -27,6 +27,8 @@ function chromeWithProfile(profile, url)
   t:start()
 end
 
+hermes = require "hermes"
+
 function tweetbot(url)
 	-- idea from https://github.com/robmathers/tweetbotlinks
 	url = string.gsub(url, "https?://www%.twitter%.com", "")
