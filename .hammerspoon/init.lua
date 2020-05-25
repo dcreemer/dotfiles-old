@@ -93,8 +93,13 @@ myEventtap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged, hs.eventtap
     local systemKey = event:systemKey()
     -- log.i(hs.inspect.inspect(systemKey))
     if systemKey.down then
+		local flags = event:getFlags()
 		if systemKey.key == "PLAY" then
-			hermes.playpause()
+			if flags.shift then
+				hermes.displayCurrentTrack()
+			else
+				hermes.playpause()
+			end
 		elseif systemKey.key == "FAST" then
 			hermes.next()
 		end
