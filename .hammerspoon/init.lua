@@ -1,4 +1,6 @@
-hs.logger.defaultLogLevel = "info"
+local log = hs.logger.new('dcreemer','info')
+log.i('Initializing')
+
 hs.loadSpoon("SpoonInstall")
 spoon.SpoonInstall.use_syncinstall = true
 
@@ -26,8 +28,6 @@ function chromeWithProfile(profile, url)
                         {"--profile-directory=" .. profile, url})
   t:start()
 end
-
-hermes = require "hermes"
 
 function tweetbot(url)
 	-- idea from https://github.com/robmathers/tweetbotlinks
@@ -85,3 +85,18 @@ expose = hs.expose.new(nil,{ includeOtherSpaces = true, showThumbnails = false }
 hs.hotkey.bind('ctrl-alt-cmd', 'e', 'Expose', function() expose:toggleShow() end)
 
 hs.hotkey.bind(hyper, "0", function() hs.reload() end)
+
+hermes = require "hermes"
+
+-- Control Hermes with system Media Keys
+myEventtap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged, hs.eventtap.event.types.NSSystemDefined }, function(event)
+    local systemKey = event:systemKey()
+    -- log.i(hs.inspect.inspect(systemKey))
+    if systemKey.down then
+		if systemKey.key == "PLAY" then
+			hermes.playpause()
+		elseif systemKey.key == "FAST" then
+			hermes.next()
+		end
+    end
+end):start()
