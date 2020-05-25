@@ -100,6 +100,8 @@ myEventtap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged, hs.eventtap
 			else
 				hermes.playpause()
 			end
+			-- return true to not propogate event, so iTunes/Music is not launched
+			return true
 		elseif systemKey.key == "FAST" then
 			hermes.next()
 		end
