@@ -89,6 +89,7 @@ hs.hotkey.bind(hyper, "0", function() hs.reload() end)
 hermes = require "hermes"
 
 -- Control Hermes with system Media Keys
+-- TODO: control playing music player only. Launch favorite one if none playing
 myEventtap = hs.eventtap.new({ hs.eventtap.event.types.flagsChanged, hs.eventtap.event.types.NSSystemDefined }, function(event)
     local systemKey = event:systemKey()
     -- log.i(hs.inspect.inspect(systemKey))
