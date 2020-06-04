@@ -45,7 +45,9 @@
         flags (event:getFlags)
         propogate (match [systemKey.key systemKey.down flags.shift]
                     ["PLAY" true true] (hermes.displayCurrentTrack)
-                    ["PLAY" true nil]  (hermes.playpause)
+                    ["PLAY" true nil]  (if (hermes.isRunning)
+                                           (hermes.playpause)
+                                           (do (hs.application.launchOrFocus "Hermes") false))
                     ["FAST" true _]    (hermes.next)
                     _ true)]
     (if propogate nil true)))
