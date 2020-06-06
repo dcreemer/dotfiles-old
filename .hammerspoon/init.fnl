@@ -47,7 +47,7 @@
                     ["PLAY" true true] (hermes.displayCurrentTrack)
                     ["PLAY" true nil]  (if (hermes.isRunning)
                                            (hermes.playpause)
-                                           (do (hs.application.launchOrFocus "Hermes") false))
+                                           (do (hs.application.launchOrFocus "Hermes") nil))
                     ["FAST" true _]    (hermes.next)
                     _ true)]
     (if propogate nil true)))
