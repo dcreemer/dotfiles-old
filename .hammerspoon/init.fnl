@@ -47,7 +47,8 @@
                     ["PLAY" true true] (hermes.displayCurrentTrack)
                     ["PLAY" true nil]  (if (hermes.isRunning)
                                            (hermes.playpause)
-                                           (do (hs.application.launchOrFocus "Hermes") nil))
+                                           (do (hs.application.launchOrFocusByBundleID
+                                                "com.alexcrichton.Hermes") nil))
                     ["FAST" true _]    (hermes.next)
                     _ true)]
     (if propogate nil true)))

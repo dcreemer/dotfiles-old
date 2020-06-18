@@ -12,6 +12,7 @@ local as = require "hs.applescript"
 local app = require "hs.application"
 
 local applicationName = 'Hermes'
+local applicationBundleID = "com.alexcrichton.Hermes"
 
 --- hs.hermes.state_paused
 --- Constant
@@ -172,7 +173,7 @@ end
 --- Returns:
 ---  * A boolean value indicating whether the Hermes application is running.
 function hermes.isRunning()
-   return app.get(applicationName) ~= nil
+   return app.get(applicationBundleID) ~= nil
 end
 
 --- hs.hermes.isPlaying()
