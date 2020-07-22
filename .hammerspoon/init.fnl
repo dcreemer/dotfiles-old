@@ -66,6 +66,7 @@
 (local Safari "com.apple.Safari")
 (local Chrome "com.google.Chrome")
 (local Tweetbot "com.tapbots.Tweetbot3Mac")
+(local Quip "com.quip.Desktop")
 (local ChromeApp "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome")
 
 (lambda make-tweetbot-url [url]
@@ -83,6 +84,23 @@
      (string.match u "^/search%?") (.. "tweetbot:" (string.gsub u "q=" "query="))
      (values nil u))))
 
+;; open Quip URLS without stopping in the browser first
+(lambda try-open-quip [id]
+  (log.i "try-open-quip 0" id)
+  (log.i "try-open-quip 1" (length id))
+  (if (and id (or (= 11 (length id)) (= 12 (length id))))
+      (let [url (.. "quip://" id)]
+        (log.i "try-open-quip 2" url)
+        (hs.urlevent.openURLWithBundle url Quip)
+        true)
+      nil))
+
+(lambda quip-app [url]
+  (let [(_ _ email-id) (string.find url "thread_id=(%w+)")
+        (_ _ bare-id) (string.find url "https://quip[%a%-]+%.com/(%w+)")]
+    (or (try-open-quip bare-id)
+        (try-open-quip email-id))))
+
 (lambda tweetbot [url]
   (let [new-url (make-tweetbot-url url)]
     (if (= new-url url)
@@ -95,22 +113,19 @@
         t (hs.task.new ChromeApp nil #false args)]
     (t:start)))
 
-(local chrome-work (partial chrome-with-profile "Profile 1"))
 (local chrome-default (partial chrome-with-profile "Default"))
 
 (Install:andUse "URLDispatcher"
                 {:config
-                 {:url_patterns [["https?://zoom.us/j/"              Zoom ]
-		                 ["https?://%w+.zoom.us/j/"    Zoom ]
-		                 ["https?://%w+.atlassian.net" nil chrome-work ]
-		                 ["https?://docs.google.com"         nil chrome-work ]
-		                 ["https?://meet.google.com"         nil chrome-default ]
-		                 ["https?://maps.google.com"         nil chrome-default ]
-		                 ["https?://google.com/maps"         nil chrome-default ]
-		                 ["https?://apple.com"               Safari ]
-		                 ["https?://www.apple.com"           Safari ]
-		                 ["https?://twitter.com"             nil tweetbot ]
-		                 ["https?://mobile.twitter.com"      nil tweetbot ]
-		                 ["https?://www.twitter.com"         nil tweetbot ]]
+                 {:url_patterns [["https?://zoom%.us/j/"             Zoom ]
+		                 ["https?://%w+%.zoom%.us/j/"        Zoom ]
+		                 ["https://quip[%a%-]+%.com/"        nil quip-app ]
+		                 ["https?://.*apple%.com"            Safari ]
+		                 ["https?://.*webex%.com"            Safari ]
+		                 ["https?://.*icloud%.com"           Safari ]
+		                 ["https?://docs%.google%.com"       nil chrome-default ]
+		                 ["https?://twitter%.com"            nil tweetbot ]
+		                 ["https?://mobile%.twitter%.com"    nil tweetbot ]
+		                 ["https?://www%.twitter%.com"       nil tweetbot ]]
 		  :default_handler DefaultBrowser}
                  :start true})
