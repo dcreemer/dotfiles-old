@@ -19,7 +19,3 @@ rustup update
 banner "Brew"
 brew update && brew outdated
 echo "-> 'brew upgrade'"
-
-banner "Brew Cask"
-brew cask outdated
-echo "-> 'brew cask upgrade'"
