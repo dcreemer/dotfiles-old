@@ -10,12 +10,18 @@ function banner() {
     echo ""
 }
 
-banner "App Store"
-mas upgrade
+if command -v mas > /dev/null; then
+    banner "App Store"
+    mas upgrade
+fi
 
-banner "Rust"
-rustup update
+if command -v rustup > /dev/null; then
+    banner "Rust"
+    rustup update
+fi
 
-banner "Brew"
-brew update && brew outdated
-echo "-> 'brew upgrade'"
+if command -v brew > /dev/null; then
+    banner "Brew"
+    brew update && brew outdated
+    echo "-> 'brew upgrade'"
+fi
