@@ -58,11 +58,13 @@
                                   handle-hermes-event)]
   (hermes-tap:start))
 
+
 ;; URL Handling
 
 ;; browsers:
 (local DefaultBrowser "org.mozilla.firefox")
 (local Zoom "us.zoom.xos")
+(local Webex "com.webex.meetinmanager")
 (local Safari "com.apple.Safari")
 (local Chrome "com.google.Chrome")
 (local Tweetbot "com.tapbots.Tweetbot3Mac")
@@ -88,7 +90,7 @@
 (lambda try-open-quip [id]
   (log.i "try-open-quip 0" id)
   (log.i "try-open-quip 1" (length id))
-  (if (and id (or (= 11 (length id)) (= 12 (length id))))
+  (if (and id (or (= 11 (length id)) (= 12 (length id)) (= 24 (length id))))
       (let [url (.. "quip://" id)]
         (log.i "try-open-quip 2" url)
         (hs.urlevent.openURLWithBundle url Quip)
@@ -97,7 +99,7 @@
 
 (lambda quip-app [url]
   (let [(_ _ email-id) (string.find url "thread_id=(%w+)")
-        (_ _ bare-id) (string.find url "https://quip[%a%-]+%.com/(%w+)")]
+        (_ _ bare-id) (string.find url "https://quip[%a%-]+%.com/([%w#]+)")]
     (or (try-open-quip bare-id)
         (try-open-quip email-id))))
 
@@ -117,15 +119,17 @@
 
 (Install:andUse "URLDispatcher"
                 {:config
-                 {:url_patterns [["https?://zoom%.us/j/"             Zoom ]
-		                 ["https?://%w+%.zoom%.us/j/"        Zoom ]
-		                 ["https://quip[%a%-]+%.com/"        nil quip-app ]
-		                 ["https?://.*apple%.com"            Safari ]
-		                 ["https?://.*webex%.com"            Safari ]
-		                 ["https?://.*icloud%.com"           Safari ]
-		                 ["https?://docs%.google%.com"       nil chrome-default ]
-		                 ["https?://twitter%.com"            nil tweetbot ]
-		                 ["https?://mobile%.twitter%.com"    nil tweetbot ]
-		                 ["https?://www%.twitter%.com"       nil tweetbot ]]
+                 {:url_patterns [["https?://zoom%.us/j/"              Zoom ]
+		                 ["https?://%w+%.zoom%.us/j/"         Zoom ]
+		                 ["https://quip[%a%-]+%.com/"         nil quip-app ]
+                     ["https?://.*box%.com"               Safari ]
+                     ["https?://.*apple%.com"             Safari ]
+		                 ["https?://.*webex%.com"             Safari ]
+		                 ["https?://.*icloud%.com"            Safari ]
+		                 ["https?://.*enterprise%.slack%.com" Safari ]
+		                 ["https?://docs%.google%.com"        nil chrome-default ]
+		                 ["https?://twitter%.com"             nil tweetbot ]
+		                 ["https?://mobile%.twitter%.com"     nil tweetbot ]
+		                 ["https?://www%.twitter%.com"        nil tweetbot ]]
 		  :default_handler DefaultBrowser}
                  :start true})
