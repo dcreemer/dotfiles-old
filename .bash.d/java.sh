@@ -8,5 +8,5 @@ if [ -x "/usr/libexec/java_home" ]; then
     setjdk() {
         export JAVA_HOME=$(/usr/libexec/java_home -v "$1")
     }
-    setjdk 11
+    setjdk 15
 fi
