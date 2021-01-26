@@ -25,3 +25,8 @@ if command -v brew > /dev/null; then
     brew update && brew outdated
     echo "-> 'brew upgrade'"
 fi
+if command -v apt > /dev/null; then
+    banner "Apt"
+    sudo apt update
+    sudo apt upgrade
+fi
