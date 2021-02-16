@@ -31,3 +31,9 @@ if command -v apt-get > /dev/null; then
     sudo apt-get update
     sudo apt-get upgrade
 fi
+
+if command -v pkg > /dev/null; then
+    banner "pkg"
+    sudo pkg update
+    sudo pkg upgrade
+fi
