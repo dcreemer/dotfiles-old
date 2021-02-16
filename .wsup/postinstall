@@ -58,17 +58,13 @@ if [[ "$OS" == "Darwin" ]]; then
          aspell \
          bash \
          bash-completion \
-         clojure \
          direnv \
          fzf \
          gnupg \
-         go \
          hugo \
          jq \
-         leiningen \
          markdown \
          mas \
-         pinentry-mac \
          pyenv \
          ripgrep \
          rustup-init \
@@ -76,16 +72,7 @@ if [[ "$OS" == "Darwin" ]]; then
          tree \
          w3m \
          wget
-    brew cask install \
+    brew install --cask \
          1password-cli \
-         appcleaner \
-         arq \
-         calibre \
-         emacs \
-         hermes \
-         horndis \
-         simplenote \
-         stay \
-         sublime-text \
-         vlc
+         appcleaner
 fi
