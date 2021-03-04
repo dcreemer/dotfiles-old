@@ -6,7 +6,7 @@ module.exports = {
       browser: "Google Chrome"
     },
     {
-      match: /^https?:\/\/(www\.)?zoom\.us\/j\/.*$/,
+      match: /^https?:\/\/([a-z0-9]+\.)?zoom\.us\/j\/.*$/,
       browser: "us.zoom.xos"
     },
     {
