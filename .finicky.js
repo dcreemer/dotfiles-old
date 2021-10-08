@@ -1,8 +1,12 @@
 module.exports = {
-  defaultBrowser: "Firefox",      
+  defaultBrowser: "Firefox",
   handlers: [
     {
       match: finicky.matchHostnames("docs.google.com"),
+      browser: "Google Chrome"
+    },
+    {
+      match: finicky.matchHostnames(["tailscale.com", "login.tailscale.com"]),
       browser: "Google Chrome"
     },
     {
