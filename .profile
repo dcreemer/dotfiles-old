@@ -22,6 +22,8 @@ if [ "$DIST" == "termux" ]; then
     export USER=$(whoami)
 else
     export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+    # reset HOMEBREW settings if set:
+    unset HOMEBREW_PREFIX HOMEBREW_SHELLENV_PREFIX HOMEBREW_NO_ANALYTICS HOMEBREW_CELLAR HOMEBREW_REPOSITORY HOMEBREW_GITHUB_API_TOKEN
     if [ -x "/usr/local/bin/brew" ]; then
         eval $(/usr/local/bin/brew shellenv)
     elif [ -x "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
