@@ -1,5 +1,7 @@
 # dotfiles
 
+*OLD*. Please see my [new dotfiles](https://github.com/dcreemer/dotfiles).
+
 My current set of dotfiles. Uses [wsup](https://github.com/dcreemer/wsup) for
 installation and management, though that tool is not needed to use these files.
 
